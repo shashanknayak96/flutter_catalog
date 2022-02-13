@@ -1,6 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:flutter_catalog/models/catalog.dart';
+import 'package:flutter_catalog/utils/routes.dart';
 
+import 'customDetail.dart';
 import 'customItem.dart';
 
 class CustomList extends StatelessWidget {
@@ -16,7 +18,17 @@ class CustomList extends StatelessWidget {
         itemCount: products.length,
         itemBuilder: (context, index) {
           final catalog = products[index];
-          return CustomItem(item: catalog);
+          return InkWell(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CustomDetail(
+                  item: catalog,
+                ),
+              ),
+            ),
+            child: CustomItem(item: catalog),
+          );
         },
       ),
     );

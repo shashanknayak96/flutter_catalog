@@ -17,7 +17,10 @@ class CustomItem extends StatelessWidget {
         padding: const EdgeInsets.only(right: 8.0),
         child: Row(
           children: [
-            CustomImage(image: item.image),
+            Hero(
+              tag: Key(item.id.toString()),
+              child: CustomImage(image: item.image),
+            ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
