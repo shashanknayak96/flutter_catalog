@@ -24,7 +24,7 @@ class _HomePage extends State<HomePage> {
   }
 
   loadData() async {
-    await Future.delayed(Duration(seconds: 4));
+    await Future.delayed(Duration(seconds: 1));
     var catalogString =
         await rootBundle.loadString("assets/files/catalog.json");
     var decodedData = jsonDecode(catalogString);
