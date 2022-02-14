@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomTheme {
   static ThemeData lightTheme(BuildContext context) => ThemeData(
-        primarySwatch: Colors.lightBlue,
+        primarySwatch: Colors.cyan,
         fontFamily: GoogleFonts.poppins().fontFamily,
         appBarTheme: AppBarTheme(
           color: Colors.white,
@@ -18,4 +18,6 @@ class CustomTheme {
       ThemeData(brightness: Brightness.dark);
   static Color whitishGrey = Color(0xfff5f5f5);
   static Color bluishGrey = Color(0xff403b58);
+  static Color amazonBlue = Color(0xff70d6e5);
+  static Color amazonDarkBlue = Colors.cyan;
 }

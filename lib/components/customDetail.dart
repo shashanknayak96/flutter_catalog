@@ -30,26 +30,50 @@ class CustomDetail extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    color: Colors.white,
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      children: [
-                        Text(
-                          item.name,
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: CustomTheme.bluishGrey,
-                            fontWeight: FontWeight.bold,
+                  child: InkWell(
+                    onTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: AnimatedContainer(
+                        duration: Duration(seconds: 1),
+                        curve: Curves.easeIn,
+                        alignment: Alignment.center,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.transparent,
+                          ),
+                          width: MediaQuery.of(context).size.width,
+                          child: Column(
+                            children: [
+                              Text(
+                                item.name,
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  color: CustomTheme.bluishGrey,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                item.desc,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: CustomTheme.bluishGrey,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(
+                                  "At diam ipsum gubergren dolores sit nonumy et sanctus. Duo consetetur voluptua sanctus magna dolor sed, et et et et sed et clita ea accusam, kasd dolor dolore stet nonumy et sadipscing vero aliquyam sea. Takimata sea et ipsum at labore. Duo rebum kasd invidunt no diam takimata sea, dolor.",
+                                  style: TextStyle(
+                                    color: CustomTheme.bluishGrey,
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                         ),
-                        Text(
-                          item.desc,
-                          style: TextStyle(
-                            color: CustomTheme.bluishGrey,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 )
@@ -72,6 +96,7 @@ class CustomDetail extends StatelessWidget {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
+                primary: CustomTheme.amazonBlue,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),

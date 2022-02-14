@@ -53,13 +53,18 @@ class CustomItem extends StatelessWidget {
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          shape: CircleBorder(),
+                          primary: CustomTheme.amazonBlue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                           padding: EdgeInsets.all(10),
                         ),
                         onPressed: () {},
-                        child: Icon(
-                          CupertinoIcons.shopping_cart,
-                          color: Colors.white,
+                        child: Text(
+                          "Add to Cart",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
                         ),
                       )
                     ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_catalog/components/customTheme.dart';
+import 'package:flutter_catalog/pages/cartpage.dart';
 import 'package:flutter_catalog/pages/homepage.dart';
 import 'package:flutter_catalog/pages/loginpage.dart';
 import 'package:flutter_catalog/pages/testPage.dart';
@@ -18,11 +19,12 @@ class MyApp extends StatelessWidget {
       title: 'HomePage',
       theme: CustomTheme.lightTheme(context),
       // darkTheme: CustomTheme.darkTheme(context),
-      initialRoute: MyRoutes.homeRoute,
+      initialRoute: MyRoutes.loginRoute,
       routes: {
         "/": (context) => HomePage(),
         MyRoutes.homeRoute: (context) => HomePage(),
         MyRoutes.loginRoute: (content) => LoginPage(),
+        MyRoutes.cartRoute: (content) => CartPage(),
         MyRoutes.testRoute: (content) => TestPage(),
       },
       debugShowCheckedModeBanner: false,
