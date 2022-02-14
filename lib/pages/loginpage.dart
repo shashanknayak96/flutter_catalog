@@ -15,21 +15,33 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: Theme.of(context).backgroundColor,
       child: SingleChildScrollView(
         child: Form(
           key: _formKey,
           child: Column(
             children: [
               SizedBox(
+                child: Container(
+                  color: Colors.white,
+                  height: 50,
+                ),
                 height: 50,
               ),
               Image.asset("assets/images/login_image.png", fit: BoxFit.cover),
               SizedBox(
                 height: 50,
               ),
-              Text("Welcome to Amazon Lite",
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                child: Text(
+                  "Welcome to Amazon Lite",
+                  style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).primaryColor),
+                ),
+              ),
               SizedBox(
                 height: 20,
               ),
@@ -38,10 +50,17 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: [
                     TextFormField(
+                      cursorColor: Theme.of(context).primaryColor,
                       initialValue: "shashank96.nayak@gmail.com",
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                      ),
                       decoration: InputDecoration(
                         hintText: "Enter your username or email address",
                         labelText: "Username/Email",
+                        labelStyle: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                        ),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -52,9 +71,15 @@ class _LoginPageState extends State<LoginPage> {
                     TextFormField(
                         initialValue: "Password@123",
                         obscureText: true,
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                        ),
                         decoration: InputDecoration(
                           hintText: "Password",
                           labelText: "Enter your password",
+                          labelStyle: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                          ),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {

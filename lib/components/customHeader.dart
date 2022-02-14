@@ -14,7 +14,7 @@ class CustomHeader extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 40,
-            color: CustomTheme.bluishGrey,
+            color: Theme.of(context).primaryColor,
           ),
         ),
         Padding(
@@ -23,6 +23,7 @@ class CustomHeader extends StatelessWidget {
             "Trending Products",
             style: TextStyle(
               fontSize: 15,
+              color: Theme.of(context).secondaryHeaderColor,
             ),
           ),
         ),

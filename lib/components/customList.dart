@@ -13,23 +13,26 @@ class CustomList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: products.length,
-        itemBuilder: (context, index) {
-          final catalog = products[index];
-          return InkWell(
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CustomDetail(
-                  item: catalog,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20.0),
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: products.length,
+          itemBuilder: (context, index) {
+            final catalog = products[index];
+            return InkWell(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CustomDetail(
+                    item: catalog,
+                  ),
                 ),
               ),
-            ),
-            child: CustomItem(item: catalog),
-          );
-        },
+              child: CustomItem(item: catalog),
+            );
+          },
+        ),
       ),
     );
   }

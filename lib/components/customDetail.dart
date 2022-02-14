@@ -11,8 +11,10 @@ class CustomDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+      ),
+      backgroundColor: Theme.of(context).backgroundColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(0.0),
@@ -50,7 +52,7 @@ class CustomDetail extends StatelessWidget {
                                 item.name,
                                 style: TextStyle(
                                   fontSize: 30,
-                                  color: CustomTheme.bluishGrey,
+                                  color: Theme.of(context).primaryColor,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -58,7 +60,7 @@ class CustomDetail extends StatelessWidget {
                                 item.desc,
                                 style: TextStyle(
                                   fontSize: 16,
-                                  color: CustomTheme.bluishGrey,
+                                  color: Theme.of(context).primaryColor,
                                 ),
                               ),
                               Padding(
@@ -66,7 +68,7 @@ class CustomDetail extends StatelessWidget {
                                 child: Text(
                                   "At diam ipsum gubergren dolores sit nonumy et sanctus. Duo consetetur voluptua sanctus magna dolor sed, et et et et sed et clita ea accusam, kasd dolor dolore stet nonumy et sadipscing vero aliquyam sea. Takimata sea et ipsum at labore. Duo rebum kasd invidunt no diam takimata sea, dolor.",
                                   style: TextStyle(
-                                    color: CustomTheme.bluishGrey,
+                                    color: Theme.of(context).primaryColor,
                                   ),
                                 ),
                               )
@@ -92,11 +94,12 @@ class CustomDetail extends StatelessWidget {
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
+                color: Theme.of(context).primaryColor,
               ),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: CustomTheme.amazonBlue,
+                primary: Theme.of(context).buttonColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),

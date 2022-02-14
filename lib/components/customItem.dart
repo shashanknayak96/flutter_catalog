@@ -22,54 +22,57 @@ class CustomItem extends StatelessWidget {
               child: CustomImage(image: item.image),
             ),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    item.name,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: CustomTheme.bluishGrey,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    item.desc,
-                    style: TextStyle(
-                      color: CustomTheme.bluishGrey,
-                      fontWeight: FontWeight.w200,
-                    ),
-                  ),
-                  ButtonBar(
-                    alignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "\$${item.price}",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      item.name,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.bold,
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: CustomTheme.amazonBlue,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          padding: EdgeInsets.all(10),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "Add to Cart",
+                    ),
+                    Text(
+                      item.desc,
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.w200,
+                      ),
+                    ),
+                    ButtonBar(
+                      alignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "\$${item.price}",
                           style: TextStyle(
-                            color: Colors.white,
-                          ),
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).primaryColor),
                         ),
-                      )
-                    ],
-                  )
-                ],
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Theme.of(context).buttonColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: EdgeInsets.all(10),
+                          ),
+                          onPressed: () {},
+                          child: Text(
+                            "Add to Cart",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ],
