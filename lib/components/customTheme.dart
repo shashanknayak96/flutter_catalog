@@ -5,7 +5,7 @@ class CustomTheme {
   static ThemeData lightTheme(BuildContext context) => ThemeData(
         primarySwatch: Colors.cyan,
         fontFamily: GoogleFonts.poppins().fontFamily,
-        backgroundColor: amazonDarkBlue,
+        backgroundColor: whitishGrey,
         primaryColor: bluishGrey,
         secondaryHeaderColor: bluishGrey,
         buttonColor: amazonDarkBlue,
