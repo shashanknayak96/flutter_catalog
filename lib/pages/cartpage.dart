@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:flutter_catalog/models/cart.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -34,23 +35,26 @@ class _CartList extends StatefulWidget {
 }
 
 class _CartListState extends State<_CartList> {
+  final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 12,
+      itemCount: _cart.items.length,
       itemBuilder: (context, index) => ListTile(
         leading: Icon(Icons.done),
         trailing: IconButton(
           icon: Icon(Icons.remove_circle),
           onPressed: () => {},
         ),
-        title: Text("Item Name"),
+        title: Text(_cart.items[index].name),
       ),
     );
   }
 }
 
 class _CartTotal extends StatelessWidget {
+  final _cart = CartModel();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -60,7 +64,7 @@ class _CartTotal extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              "\$999",
+              "\$${_cart.totalPrice}",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 35,
