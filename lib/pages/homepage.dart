@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_catalog/components/customHeader.dart';
 import 'package:flutter_catalog/components/customList.dart';
 import 'package:flutter_catalog/components/customTheme.dart';
 import 'package:flutter_catalog/models/catalog.dart';
+import 'package:flutter_catalog/models/item.dart';
 import 'package:flutter_catalog/utils/routes.dart';
 
 class HomePage extends StatefulWidget {

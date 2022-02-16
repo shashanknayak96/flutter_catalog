@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:flutter_catalog/models/catalog.dart';
+import 'package:flutter_catalog/models/item.dart';
 import 'package:flutter_catalog/utils/routes.dart';
 
 import 'customDetail.dart';

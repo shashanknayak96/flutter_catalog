@@ -1,7 +1,7 @@
 import 'item.dart';
 
 class CatalogModel {
-  List<Item> items = [];
+  static List<Item> items = [];
 
   Item getById(int id) {
     return items.firstWhere((element) => element.id == id);
