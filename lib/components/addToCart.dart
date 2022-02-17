@@ -27,6 +27,12 @@ class AddToCart extends StatelessWidget {
         padding: EdgeInsets.all(10),
       ),
       onPressed: () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            duration: Duration(seconds: 1),
+            content: Text("Item added to cart."),
+          ),
+        );
         if (!isInCart) AddMutation(item);
       },
       child: isInCart

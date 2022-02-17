@@ -9,6 +9,7 @@ class CustomTheme {
         primaryColor: bluishGrey,
         secondaryHeaderColor: bluishGrey,
         buttonColor: amazonDarkBlue,
+        snackBarTheme: SnackBarThemeData(backgroundColor: bluishGrey),
         cardColor: Colors.white,
         appBarTheme: AppBarTheme(
           color: Colors.white,

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_catalog/components/addToCart.dart';
 import 'package:flutter_catalog/models/catalog.dart';
 import 'package:flutter_catalog/models/item.dart';
 
@@ -102,22 +103,7 @@ class CustomDetail extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
               ),
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Theme.of(context).buttonColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                padding: EdgeInsets.all(16),
-              ),
-              onPressed: () {},
-              child: Text(
-                "Add To Cart",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            )
+            AddToCart(item: item),
           ],
         ),
       ),
