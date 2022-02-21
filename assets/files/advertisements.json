@@ -1,0 +1,28 @@
+{
+    "advertisements": [
+        {
+            "id": 1, 
+            "name": "Electronics Sale",
+            "toLink": "",
+            "image": "assets/images/advertisement_images/Clothes.png"
+        },
+        {
+            "id": 2, 
+            "name": "Bags Sale",
+            "toLink": "",
+            "image": "assets/images/advertisement_images/Electronics.png"
+        },
+        {
+            "id": 3, 
+            "name": "Clothes Sale",
+            "toLink": "",
+            "image": "assets/images/advertisement_images/Bags.png"
+        },
+        {
+            "id": 4, 
+            "name": "Shoes Sale",
+            "toLink": "",
+            "image": "assets/images/advertisement_images/Shoes.png"
+        }
+    ]    
+}
