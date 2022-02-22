@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 import 'package:flutter_catalog/components/customAdvertisingList.dart';
+import 'package:flutter_catalog/components/customDeliveryAddress.dart';
 import 'package:flutter_catalog/components/customDrawer.dart';
 import 'package:flutter_catalog/components/customHeader.dart';
 import 'package:flutter_catalog/components/customList.dart';
@@ -67,21 +68,16 @@ class _HomePage extends State<HomePage> {
       ),
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              CustomDeliveryAddress(),
               CustomAdvertisingList(
                 advertisementItems: AdvertisementItemList.items,
               ),
-              if (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
-                CustomList(
-                  products: CatalogModel.items,
-                )
-              else
-                Center(
-                  child: CircularProgressIndicator(),
-                ),
+              CustomList(
+                products: CatalogModel.items,
+              )
             ],
           ),
         ),

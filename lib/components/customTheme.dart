@@ -3,11 +3,26 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomTheme {
   static ThemeData lightTheme(BuildContext context) => ThemeData(
-        primarySwatch: Colors.cyan,
+        backgroundColor: white,
+
+        primaryColor: red, // TextColor
+        secondaryHeaderColor: black, // TextColor
         fontFamily: GoogleFonts.poppins().fontFamily,
-        backgroundColor: whitishGrey,
-        primaryColor: bluishGrey,
-        secondaryHeaderColor: bluishGrey,
+
+        textTheme: TextTheme(
+          headline1: TextStyle(
+            color: red,
+          ),
+          headline2: TextStyle(
+            color: black,
+          ),
+        ),
+
+        iconTheme: IconThemeData(
+          color: red,
+        ),
+
+        primarySwatch: Colors.cyan,
         buttonColor: amazonDarkBlue,
         snackBarTheme: SnackBarThemeData(backgroundColor: bluishGrey),
         cardColor: Colors.white,
@@ -38,8 +53,8 @@ class CustomTheme {
       );
 
   // Light
-  static Color whitishGrey = Color(0xfff5f5f5);
-  static Color bluishGrey = Color(0xff403b58);
+  static Color whitishGrey = Color(0xfffdfdff);
+  static Color bluishGrey = Color(0xff2d2d34);
   static Color amazonBlue = Color(0xff70d6e5);
   static Color amazonDarkBlue = Colors.cyan;
 
@@ -47,4 +62,11 @@ class CustomTheme {
   static Color darkGrey = Color(0xff262626);
   static Color lessDarkGrey = Color(0xff404040);
   static Color darkAmazonDarkBlue = Color(0xff006b78);
+
+  // Light
+  static Color white = Color(0xffF7F7FF);
+  static Color black = Color(0xff2d2d34);
+  static Color red = Color(0xffB97375);
+  static Color blue = Color(0xff50A2A7);
+  static Color yellow = Color(0xffE9B44C);
 }
