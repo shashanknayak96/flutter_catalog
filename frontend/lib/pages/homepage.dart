@@ -77,6 +77,9 @@ class _HomePage extends State<HomePage> {
                   advertisementItems: AdvertisementItemList.items,
                 ),
 
+                // Ads
+                // Footer?
+
                 // CustomList(
                 //   products: CatalogModel.items,
                 // )
