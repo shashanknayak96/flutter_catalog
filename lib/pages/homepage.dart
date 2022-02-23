@@ -66,19 +66,22 @@ class _HomePage extends State<HomePage> {
           color: Colors.white,
         ),
       ),
-      body: SafeArea(
-        child: Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomDeliveryAddress(),
-              CustomAdvertisingList(
-                advertisementItems: AdvertisementItemList.items,
-              ),
-              CustomList(
-                products: CatalogModel.items,
-              )
-            ],
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // CustomDeliveryAddress(),
+                CustomAdvertisingList(
+                  advertisementItems: AdvertisementItemList.items,
+                ),
+
+                // CustomList(
+                //   products: CatalogModel.items,
+                // )
+              ],
+            ),
           ),
         ),
       ),

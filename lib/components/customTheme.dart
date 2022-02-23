@@ -4,10 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomTheme {
   static ThemeData lightTheme(BuildContext context) => ThemeData(
         backgroundColor: white,
+        dividerColor: offwhite,
 
         primaryColor: red, // TextColor
         secondaryHeaderColor: black, // TextColor
         fontFamily: GoogleFonts.poppins().fontFamily,
+
+        indicatorColor: red,
 
         textTheme: TextTheme(
           headline1: TextStyle(
@@ -64,7 +67,8 @@ class CustomTheme {
   static Color darkAmazonDarkBlue = Color(0xff006b78);
 
   // Light
-  static Color white = Color(0xffF7F7FF);
+  static Color white = Color(0xffFFF4EC);
+  static Color offwhite = Color(0xffE7CFBC);
   static Color black = Color(0xff2d2d34);
   static Color red = Color(0xffB97375);
   static Color blue = Color(0xff50A2A7);

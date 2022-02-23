@@ -27,7 +27,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.yellow,
+      backgroundColor: Theme.of(context).backgroundColor,
       title: searchBar,
       automaticallyImplyLeading: false,
       centerTitle: true,
@@ -47,20 +47,31 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                   minLeadingWidth: 0,
                   title: TextField(
                     style: TextStyle(
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).secondaryHeaderColor,
                     ),
                     cursorColor: Theme.of(context).primaryColor,
                     autofocus: true,
                     decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).backgroundColor,
+                        ),
+                      ),
                       // filled:true ,
                       // fillColor: Colors.white,
                       contentPadding: const EdgeInsets.only(
                           left: 8.0, bottom: 8.0, top: 8.0),
                       border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
+                        borderSide: BorderSide(
+                          color: Theme.of(context).backgroundColor,
+                        ),
                       ),
+                      focusColor: Theme.of(context).backgroundColor,
+                      hoverColor: Theme.of(context).backgroundColor,
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
+                        borderSide: BorderSide(
+                          color: Theme.of(context).backgroundColor,
+                        ),
                       ),
                       hintText: "Search Catalog",
                       hintStyle: TextStyle(color: Colors.white30),
