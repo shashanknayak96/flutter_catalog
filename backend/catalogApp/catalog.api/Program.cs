@@ -1,10 +1,13 @@
-using catalog.db.Models;
+using catalog.db;
 using catalog.db.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("CatalogDatabase"));
+builder.Services.Configure<catalog.db.ConfigurationManager>(builder.Configuration.GetSection("ConfigurationManager"));
 builder.Services.AddSingleton<UserService>();
+builder.Services.AddSingleton<AdvertisementService>();
+
+builder.Services.AddSingleton<IDatabaseSettings, DatabaseSettings>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

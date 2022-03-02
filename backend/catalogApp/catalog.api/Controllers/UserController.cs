@@ -22,7 +22,6 @@ public class UserController : ControllerBase
         return users;
     }
 
-
     [HttpGet("{id:length(24)}")]
     public async Task<User> GetUserById(string Id) 
     {

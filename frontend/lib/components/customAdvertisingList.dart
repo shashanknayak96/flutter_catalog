@@ -30,21 +30,21 @@ class _CustomAdvertisingListState extends State<CustomAdvertisingList> {
   void initState() {
     super.initState();
 
-    _timer = Timer.periodic(
-      Duration(seconds: 5),
-      (Timer timer) {
-        if (_currentPage < 3) {
-          _currentPage++;
-        } else {
-          _currentPage = 0;
-        }
+    // _timer = Timer.periodic(
+    //   Duration(seconds: 5),
+    //   (Timer timer) {
+    //     if (_currentPage < 3) {
+    //       _currentPage++;
+    //     } else {
+    //       _currentPage = 0;
+    //     }
 
-        // _pageController.animateToPage(
-        //   _currentPage,
-        //   duration: Duration(milliseconds: 350),
-        //   curve: Curves.easeInCubic,
-        // );
-      },
+    //     // _pageController.animateToPage(
+    //     //   _currentPage,
+    //     //   duration: Duration(milliseconds: 350),
+    //     //   curve: Curves.easeInCubic,
+    //     // );
+    //   },
     );
   }
 

@@ -20,6 +20,15 @@ class AdvertisementItem {
     );
   }
 
+  factory AdvertisementItem.fromJson(Map<String, dynamic> json) {
+    return AdvertisementItem(
+      id: json["id"],
+      name: json["name"],
+      toLink: json["toLink"],
+      image: json["imageUrl"],
+    );
+  }
+
   toMap() => {
         "id": id,
         "name": name,
