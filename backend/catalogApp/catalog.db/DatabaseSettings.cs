@@ -10,7 +10,7 @@ public class DatabaseSettings : IDatabaseSettings
     private readonly string _usersCollection;
     private readonly string _advertisementCollection;
 
-    public DatabaseSettings(IOptions<ConfigurationManager> databaseSettings)
+    public DatabaseSettings(IOptions<DatabaseManager> databaseSettings)
     {
         var mongoClient = new MongoClient(databaseSettings.Value.ConnectionString);
         _mongoDatabase = mongoClient.GetDatabase(databaseSettings.Value.DatabaseName);

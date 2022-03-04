@@ -502,11 +502,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "e:\\Flutter Projects\\flutter_catalog\\backend\\catalogApp\\catalog.db\\catalog.db.csproj",
+      "projectUniqueName": "E:\\Flutter Projects\\flutter_catalog\\backend\\catalogApp\\catalog.db\\catalog.db.csproj",
       "projectName": "catalog.db",
-      "projectPath": "e:\\Flutter Projects\\flutter_catalog\\backend\\catalogApp\\catalog.db\\catalog.db.csproj",
+      "projectPath": "E:\\Flutter Projects\\flutter_catalog\\backend\\catalogApp\\catalog.db\\catalog.db.csproj",
       "packagesPath": "C:\\Users\\Nayak\\.nuget\\packages\\",
-      "outputPath": "e:\\Flutter Projects\\flutter_catalog\\backend\\catalogApp\\catalog.db\\obj\\",
+      "outputPath": "E:\\Flutter Projects\\flutter_catalog\\backend\\catalogApp\\catalog.db\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Nayak\\AppData\\Roaming\\NuGet\\NuGet.Config"

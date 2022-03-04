@@ -45,7 +45,7 @@ class _CustomAdvertisingListState extends State<CustomAdvertisingList> {
     //     //   curve: Curves.easeInCubic,
     //     // );
     //   },
-    );
+    // );
   }
 
   @override
@@ -75,16 +75,16 @@ class _CustomAdvertisingListState extends State<CustomAdvertisingList> {
               ),
             ),
           ),
-          SmoothPageIndicator(
-            controller: _pageController,
-            count: 4, // widget.advertisementItems.length,
-            effect: WormEffect(
-              dotHeight: 8,
-              dotWidth: 12,
-              type: WormType.normal,
-              activeDotColor: Theme.of(context).indicatorColor,
-            ),
-          ),
+          // SmoothPageIndicator(
+          //   controller: _pageController,
+          //   count: 4, // widget.advertisementItems.length,
+          //   effect: WormEffect(
+          //     dotHeight: 8,
+          //     dotWidth: 12,
+          //     type: WormType.normal,
+          //     activeDotColor: Theme.of(context).indicatorColor,
+          //   ),
+          // ),
         ],
       ),
     );

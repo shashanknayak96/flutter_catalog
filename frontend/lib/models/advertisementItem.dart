@@ -1,7 +1,7 @@
 class AdvertisementItem {
-  final int id;
+  final String id;
   final String name;
-  final String toLink;
+  final String? toLink;
   final String image;
 
   AdvertisementItem({
@@ -24,7 +24,7 @@ class AdvertisementItem {
     return AdvertisementItem(
       id: json["id"],
       name: json["name"],
-      toLink: json["toLink"],
+      toLink: json["toLink"] ?? null,
       image: json["imageUrl"],
     );
   }
