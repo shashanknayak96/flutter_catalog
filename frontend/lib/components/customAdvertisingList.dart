@@ -5,7 +5,7 @@ import 'package:flutter_catalog/models/advertisementItem.dart';
 import 'package:flutter_catalog/models/advertisementItemList.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import 'customAdvertisingItem.dart';
+import 'CustomAdvertisingItem.dart';
 import 'customScrollBehavior.dart';
 
 class CustomAdvertisingList extends StatefulWidget {
@@ -57,7 +57,7 @@ class _CustomAdvertisingListState extends State<CustomAdvertisingList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250.0,
+      height: 200.0,
       child: Column(
         children: [
           Expanded(

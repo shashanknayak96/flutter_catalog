@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 
-class CustomDrawer extends StatelessWidget {
+final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+
+class OptionsDrawer extends StatelessWidget {
   final String profilePic = "https://dummyimage.com/500X500/ffedbf/000000.jpg";
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      key: scaffoldKey,
       backgroundColor: Colors.lightBlue.shade300,
       child: Container(
         padding: EdgeInsets.zero,

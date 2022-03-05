@@ -5,4 +5,6 @@ public interface IDatabaseSettings
 {
     IMongoCollection<User> getUserCollection();
     IMongoCollection<Advertisement> getAdvertisementCollection();
+    IMongoCollection<Category> getCategoryCollection();
+    IMongoCollection<Product> getProductCollection();
 }

@@ -9,6 +9,8 @@ public class DatabaseSettings : IDatabaseSettings
     private readonly IMongoDatabase _mongoDatabase;
     private readonly string _usersCollection;
     private readonly string _advertisementCollection;
+    private readonly string _categoryCollection;
+    private readonly string _productCollection;
 
     public DatabaseSettings(IOptions<DatabaseManager> databaseSettings)
     {
@@ -16,6 +18,8 @@ public class DatabaseSettings : IDatabaseSettings
         _mongoDatabase = mongoClient.GetDatabase(databaseSettings.Value.DatabaseName);
         _usersCollection = databaseSettings.Value.UsersCollection;
         _advertisementCollection = databaseSettings.Value.AdvertisementCollection;
+        _categoryCollection = databaseSettings.Value.CategoryCollection;
+        _productCollection = databaseSettings.Value.ProductCollection;
     }
 
     public IMongoCollection<User> getUserCollection()
@@ -26,5 +30,15 @@ public class DatabaseSettings : IDatabaseSettings
     public IMongoCollection<Advertisement> getAdvertisementCollection()
     {
         return _mongoDatabase.GetCollection<Advertisement>(_advertisementCollection);
+    }
+
+    public IMongoCollection<Category> getCategoryCollection()
+    {
+        return _mongoDatabase.GetCollection<Category>(_categoryCollection);
+    }
+
+    public IMongoCollection<Product> getProductCollection()
+    {
+        return _mongoDatabase.GetCollection<Product>(_productCollection);
     }
 }

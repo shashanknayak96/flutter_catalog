@@ -4,26 +4,29 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomTheme {
   static ThemeData lightTheme(BuildContext context) => ThemeData(
         backgroundColor: white,
-        dividerColor: offwhite,
+        dialogBackgroundColor: lightBlue,
+        textTheme: TextTheme(
+          headline1: TextStyle(
+            color: darkBlue,
+            fontWeight: FontWeight.w900,
+            fontSize: 20.0,
+          ),
+          headline2: TextStyle(
+            color: darkBlue,
+            fontWeight: FontWeight.w900,
+            fontSize: 15.0,
+          ),
+        ),
+        iconTheme: IconThemeData(
+          color: darkBlue,
+          size: 25,
+        ),
 
+        dividerColor: offwhite,
         primaryColor: red, // TextColor
         secondaryHeaderColor: black, // TextColor
         fontFamily: GoogleFonts.poppins().fontFamily,
-
         indicatorColor: red,
-
-        textTheme: TextTheme(
-          headline1: TextStyle(
-            color: red,
-          ),
-          headline2: TextStyle(
-            color: black,
-          ),
-        ),
-
-        iconTheme: IconThemeData(
-          color: red,
-        ),
 
         primarySwatch: Colors.cyan,
         buttonColor: amazonDarkBlue,
@@ -67,7 +70,10 @@ class CustomTheme {
   static Color darkAmazonDarkBlue = Color(0xff006b78);
 
   // Light
-  static Color white = Color(0xffFFF4EC);
+  static Color white = Color(0xffffffff);
+  static Color darkBlue = Color(0xff041C32);
+  static Color lightBlue = Color(0xff64FCD9);
+
   static Color offwhite = Color(0xffE7CFBC);
   static Color black = Color(0xff2d2d34);
   static Color red = Color(0xffB97375);

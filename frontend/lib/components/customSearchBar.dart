@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomSearchBar extends StatefulWidget implements PreferredSizeWidget {
@@ -13,14 +14,15 @@ class CustomSearchBar extends StatefulWidget implements PreferredSizeWidget {
 class _CustomSearchBarState extends State<CustomSearchBar> {
   bool showSearchBar = false;
   Icon searchIcon = const Icon(
-    Icons.search,
-    color: Color(0xffB97375),
+    CupertinoIcons.search_circle_fill,
+    color: Color(0xff041C32),
   );
   Widget searchBar = const Text(
     "Catalog App",
     style: TextStyle(
+      fontSize: 20.0,
       fontWeight: FontWeight.bold,
-      color: Color(0xffB97375),
+      color: Color(0xff041C32),
     ),
   );
 
@@ -83,7 +85,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
               } else {
                 // Hide it
                 searchIcon = Icon(
-                  Icons.search,
+                  CupertinoIcons.search_circle_fill,
                   color: Theme.of(context).iconTheme.color,
                 );
                 searchBar = Text(

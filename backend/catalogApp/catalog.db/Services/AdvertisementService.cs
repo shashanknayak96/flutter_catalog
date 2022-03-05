@@ -16,8 +16,10 @@ public class AdvertisementService : IService<Advertisement>
     public async Task<List<Advertisement>> GetAsync() =>
         await _databaseSet.getAdvertisementCollection().Find(_ => true).ToListAsync();
 
+    #nullable enable
     public async Task<Advertisement?> GetAsync(string id) => 
         await _databaseSet.getAdvertisementCollection().Find(x => x.Id == id).FirstOrDefaultAsync();
+    #nullable disable
     public async Task CreateAsync(Advertisement user) =>
         await _databaseSet.getAdvertisementCollection().InsertOneAsync(user);
 

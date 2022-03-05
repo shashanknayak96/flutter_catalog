@@ -9,6 +9,8 @@ builder.Services.AddSingleton<IDatabaseSettings, DatabaseSettings>();
 // Services
 builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<AdvertisementService>();
+builder.Services.AddSingleton<CategoryService>();
+builder.Services.AddSingleton<ProductService>();
 
 builder.Services.AddCors(options =>
 {

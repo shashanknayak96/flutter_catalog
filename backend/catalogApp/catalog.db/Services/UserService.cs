@@ -16,8 +16,11 @@ public class UserService : IService<User>
     public async Task<List<User>> GetAsync() =>
         await _databaseSet.getUserCollection().Find(_ => true).ToListAsync();
 
+    #nullable enable
     public async Task<User?> GetAsync(string id) => 
         await _databaseSet.getUserCollection().Find(x => x.Id == id).FirstOrDefaultAsync();
+    #nullable disable
+    
     public async Task CreateAsync(User user) =>
         await _databaseSet.getUserCollection().InsertOneAsync(user);
 
