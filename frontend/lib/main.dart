@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_catalog/components/customTheme.dart';
 import 'package:flutter_catalog/core/CatalogStore.dart';
 import 'package:flutter_catalog/pages/cartpage.dart';
+import 'package:flutter_catalog/pages/demo.dart';
 import 'package:flutter_catalog/pages/homepage.dart';
 import 'package:flutter_catalog/pages/loginpage.dart';
 import 'package:flutter_catalog/pages/testPage.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'HomePage',
       theme: CustomTheme.lightTheme(context),
-      darkTheme: CustomTheme.darkTheme(context),
+      // darkTheme: CustomTheme.darkTheme(context),
       initialRoute: MyRoutes.homeRoute,
       routes: {
         "/": (context) => HomePage(),
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         MyRoutes.loginRoute: (content) => LoginPage(),
         MyRoutes.cartRoute: (content) => CartPage(),
         MyRoutes.testRoute: (content) => TestPage(),
+        MyRoutes.demoRoute: (content) => DemoPage(),
       },
       debugShowCheckedModeBanner: false,
     );

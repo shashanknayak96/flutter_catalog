@@ -5,19 +5,20 @@ import 'package:flutter_catalog/models/advertisementItem.dart';
 import 'package:flutter_catalog/models/advertisementItemList.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import 'CustomAdvertisingItem.dart';
+import 'AdvertisingItem.dart';
 import 'customScrollBehavior.dart';
 
-class CustomAdvertisingList extends StatefulWidget {
+class CustomAdvertisingItemList extends StatefulWidget {
   final List<AdvertisementItem> advertisementItems;
-  const CustomAdvertisingList({Key? key, required this.advertisementItems})
+  const CustomAdvertisingItemList({Key? key, required this.advertisementItems})
       : super(key: key);
 
   @override
-  State<CustomAdvertisingList> createState() => _CustomAdvertisingListState();
+  State<CustomAdvertisingItemList> createState() =>
+      _CustomAdvertisingListState();
 }
 
-class _CustomAdvertisingListState extends State<CustomAdvertisingList> {
+class _CustomAdvertisingListState extends State<CustomAdvertisingItemList> {
   int _currentPage = 0;
   late Timer _timer;
   PageController _pageController = PageController(

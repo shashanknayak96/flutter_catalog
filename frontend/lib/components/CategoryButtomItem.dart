@@ -1,9 +1,10 @@
 import "package:flutter/material.dart";
 import 'package:flutter_catalog/models/category.dart';
 
-class CategoryButton extends StatelessWidget {
+class CategoryButtonItem extends StatelessWidget {
   final Category category;
-  const CategoryButton({Key? key, required this.category}) : super(key: key);
+  const CategoryButtonItem({Key? key, required this.category})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +14,8 @@ class CategoryButton extends StatelessWidget {
         onTap: () {},
         child: AnimatedContainer(
           duration: Duration(seconds: 1),
-          height: 50,
-          width: 150,
+          height: 35,
+          width: 100,
           curve: Curves.easeIn,
           alignment: Alignment.center,
           child: Text(

@@ -35,6 +35,9 @@ public class ProductController : ControllerBase
         var product = await _productService.GeByCategoryNames(categoryName);
         return product ?? null;
     }
+
+    // GET TRENDING 
+    // GET TOP 10
     
     [HttpPost]
     public async Task<IActionResult> AddUser(Product product)

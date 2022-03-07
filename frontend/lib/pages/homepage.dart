@@ -1,26 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
-import 'package:flutter/services.dart';
-import 'package:flutter_catalog/components/CategoryButton.dart';
-import 'package:flutter_catalog/components/CategoryButtonList.dart';
-import 'package:flutter_catalog/components/CustomAdvertisingList.dart';
-import 'package:flutter_catalog/components/customButton.dart';
-import 'package:flutter_catalog/components/customDeliveryAddress.dart';
+import 'package:flutter_catalog/components/CategoryButtomItemList.dart';
+import 'package:flutter_catalog/components/AdvertisingItemList.dart';
+import 'package:flutter_catalog/components/ProductGridItemList.dart';
 import 'package:flutter_catalog/components/OptionsDrawer.dart';
-import 'package:flutter_catalog/components/customHeader.dart';
-import 'package:flutter_catalog/components/customList.dart';
-import 'package:flutter_catalog/components/customSearchBar.dart';
-import 'package:flutter_catalog/components/customTheme.dart';
 import 'package:flutter_catalog/components/HomePageAppBar.dart';
+import 'package:flutter_catalog/components/customScrollBehavior.dart';
 import 'package:flutter_catalog/models/advertisementItem.dart';
 import 'package:flutter_catalog/models/advertisementItemList.dart';
-import 'package:flutter_catalog/models/catalog.dart';
 import 'package:flutter_catalog/models/category.dart';
 import 'package:flutter_catalog/models/categoryList.dart';
-import 'package:flutter_catalog/models/item.dart';
-import 'package:flutter_catalog/utils/routes.dart';
+import 'package:flutter_catalog/models/product.dart';
 import "package:http/http.dart" as http;
 
 class HomePage extends StatefulWidget {
@@ -49,24 +40,7 @@ class _HomePage extends State<HomePage> {
 
     await loadAdvertisementData();
     await loadCategoryList();
-
-    // await rootBundle.loadString("assets/files/advertisements.json");
-    // if (advertisementResponse.statusCode == 200) {
-    //   // If the server did return a 200 OK response,
-    //   // then parse the JSON.
-    //   var decodedAdvertisementData = jsonDecode(advertisementResponse.body);
-    //   AdvertisementItemList.items = List.from(decodedAdvertisementData)
-    //       .map<AdvertisementItem>((item) => AdvertisementItem.fromJson(item))
-    //       .toList();
-    // }
-
-    // var decodedAdvertisementData = jsonDecode(advertisementString);
-    // var advertisementData = decodedAdvertisementData["advertisements"];
-
-    // AdvertisementItemList.items = List.from(advertisementData)
-    //     .map<AdvertisementItem>((item) => AdvertisementItem.fromJson(item))
-    //     .toList();
-
+    await loadProductList();
     setState(() {});
   }
 
@@ -86,27 +60,37 @@ class _HomePage extends State<HomePage> {
       //     color: Colors.white,
       //   ),
       // ),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // CustomDeliveryAddress(),
-                CustomAdvertisingList(
-                  advertisementItems: AdvertisementItemList.items,
-                ),
-                CategoryButtonList(
-                  categoryList: CategoryList.items,
-                ),
-                Text("CURRENTLY TRENDING"),
-                // Ads
-                // Footer?
+      body: ScrollConfiguration(
+        behavior: CustomBehavior(),
+        child: SingleChildScrollView(
+          child: SafeArea(
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // CustomDeliveryAddress(),
+                  CustomAdvertisingItemList(
+                    advertisementItems: AdvertisementItemList.items,
+                  ),
+                  CategoryButtonItemList(
+                    categoryList: CategoryList.items,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+                    child: Text(
+                      "CURRENTLY TRENDING",
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
+                  ),
+                  ProductGridItemList(products: ProductList.products),
+                  // Ads
+                  // Footer?
 
-                // CustomList(
-                //   products: CatalogModel.items,
-                // )
-              ],
+                  // CustomList(
+                  //   products: CatalogModel.items,
+                  // )
+                ],
+              ),
             ),
           ),
         ),
@@ -159,8 +143,31 @@ class _HomePage extends State<HomePage> {
         CategoryList.items = List.from(decodedCategoryData)
             .map<Category>((item) => Category.fromJson(item))
             .toList();
+      }
+    } on SocketException {
+      print("No internet connection.");
+    }
+  }
 
-        print("___________" + CategoryList.items.toString());
+  loadProductList() async {
+    try {
+      var productResponse = await http.get(
+        Uri.parse("http://192.168.31.101:8084/api/product"),
+        headers: {
+          "Accept": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": "true",
+          "Access-Control-Allow-Headers":
+              "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+        },
+      );
+
+      if (productResponse.statusCode == 200) {
+        var decodedProductData = jsonDecode(productResponse.body);
+        ProductList.products = List.from(decodedProductData)
+            .map<Product>((item) => Product.fromJson(item))
+            .toList();
       }
     } on SocketException {
       print("No internet connection.");

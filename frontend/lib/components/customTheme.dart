@@ -6,17 +6,26 @@ class CustomTheme {
         backgroundColor: white,
         dialogBackgroundColor: lightBlue,
         textTheme: TextTheme(
-          headline1: TextStyle(
-            color: darkBlue,
-            fontWeight: FontWeight.w900,
-            fontSize: 20.0,
-          ),
-          headline2: TextStyle(
-            color: darkBlue,
-            fontWeight: FontWeight.w900,
-            fontSize: 15.0,
-          ),
-        ),
+            headline1: TextStyle(
+              color: darkBlue,
+              fontWeight: FontWeight.w900,
+              fontSize: 20.0,
+            ),
+            headline2: TextStyle(
+              color: darkBlue,
+              fontWeight: FontWeight.w900,
+              fontSize: 12.0,
+            ),
+            headline3: TextStyle(
+              color: darkBlue,
+              fontWeight: FontWeight.w900,
+              fontSize: 18.0,
+            ),
+            headline4: TextStyle(
+              color: darkBlue,
+              fontWeight: FontWeight.w900,
+              fontSize: 15.0,
+            )),
         iconTheme: IconThemeData(
           color: darkBlue,
           size: 25,
