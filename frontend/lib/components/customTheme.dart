@@ -30,7 +30,6 @@ class CustomTheme {
           color: darkBlue,
           size: 25,
         ),
-
         dividerColor: offwhite,
         primaryColor: red, // TextColor
         secondaryHeaderColor: black, // TextColor
