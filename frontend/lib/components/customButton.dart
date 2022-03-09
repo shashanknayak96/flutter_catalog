@@ -13,49 +13,41 @@ class CustomButton extends StatefulWidget {
 }
 
 class _CustomButtonState extends State<CustomButton> {
-  bool changeButton = false;
-
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Theme.of(context).backgroundColor,
-      child: InkWell(
-        onTap: () => widget.action(context),
-        child: AnimatedContainer(
-          duration: Duration(seconds: 1),
-          height: 50,
-          curve: Curves.easeIn,
-          alignment: Alignment.center,
-          child: changeButton
-              ? Icon(
-                  Icons.done,
-                  color: Colors.white,
-                )
-              : Text(
-                  widget.buttonName.toString(),
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 22,
-                  ),
-                ),
-          decoration: BoxDecoration(
-            color: changeButton ? Colors.grey : widget.color,
-            borderRadius: BorderRadius.circular(changeButton ? 50 : 6),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: InkWell(
+          onTap: () => widget.action(context),
+          child: AnimatedContainer(
+            duration: Duration(seconds: 1),
+            height: 50,
+            curve: Curves.easeIn,
+            alignment: Alignment.center,
+            child: Text(
+              widget.buttonName.toString(),
+              style: Theme.of(context).textTheme.headline1,
+            ),
+            decoration: BoxDecoration(
+              color: widget.color,
+              borderRadius: BorderRadius.circular(10.0),
+            ),
           ),
         ),
       ),
     );
   }
 
-  moveToHomePage(BuildContext context) async {
-    setState(() {
-      changeButton = true;
-    });
-    await Future.delayed(Duration(seconds: 3));
-    await Navigator.pushNamed(context, MyRoutes.homeRoute);
-    setState(() {
-      changeButton = false;
-    });
-  }
+  // moveToHomePage(BuildContext context) async {
+  //   setState(() {
+  //     changeButton = true;
+  //   });
+  //   await Future.delayed(Duration(seconds: 3));
+  //   await Navigator.pushNamed(context, MyRoutes.homeRoute);
+  //   setState(() {
+  //     changeButton = false;
+  //   });
+  // }
 }

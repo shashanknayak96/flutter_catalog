@@ -25,7 +25,7 @@ class HomePageAppBar extends StatelessWidget with PreferredSizeWidget {
           ),
         ),
         title: Text(
-          "CATALOG APP",
+          "SOME SHOPPING APP",
           style: Theme.of(context).textTheme.headline1,
         ),
         actions: [

@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:flutter_catalog/components/customButton.dart';
+import 'package:flutter_catalog/components/CustomButton.dart';
 import 'package:flutter_catalog/utils/routes.dart';
 
 class LoginPage extends StatefulWidget {
