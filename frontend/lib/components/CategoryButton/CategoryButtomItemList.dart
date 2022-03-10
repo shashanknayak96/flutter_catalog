@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
-import 'package:flutter_catalog/components/CategoryButtomItem.dart';
+import 'package:flutter_catalog/components/CategoryButton/CategoryButtomItem.dart';
 import 'package:flutter_catalog/models/category.dart';
 
-import 'customScrollBehavior.dart';
+import '../customScrollBehavior.dart';
 
 class CategoryButtonItemList extends StatelessWidget {
   final List<Category> categoryList;

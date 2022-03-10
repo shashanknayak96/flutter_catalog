@@ -6,7 +6,7 @@ import 'package:flutter_catalog/models/advertisementItemList.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'AdvertisingItem.dart';
-import 'customScrollBehavior.dart';
+import '../customScrollBehavior.dart';
 
 class CustomAdvertisingItemList extends StatefulWidget {
   final List<AdvertisementItem> advertisementItems;

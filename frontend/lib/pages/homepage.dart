@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 import "package:flutter/material.dart";
-import 'package:flutter_catalog/components/CategoryButtomItemList.dart';
-import 'package:flutter_catalog/components/AdvertisingItemList.dart';
-import 'package:flutter_catalog/components/ProductGridItemList.dart';
-import 'package:flutter_catalog/components/OptionsDrawer.dart';
-import 'package:flutter_catalog/components/HomePageAppBar.dart';
+import 'package:flutter_catalog/components/Advertisement/AdvertisingItemList.dart';
+import 'package:flutter_catalog/components/App_BottomBar/HomePageAppBar.dart';
+import 'package:flutter_catalog/components/App_BottomBar/HomePageBottomBar.dart';
+import 'package:flutter_catalog/components/CategoryButton/CategoryButtomItemList.dart';
+import 'package:flutter_catalog/components/Drawer/OptionsDrawer.dart';
+import 'package:flutter_catalog/components/ProductGrid/ProductGridItemList.dart';
 import 'package:flutter_catalog/components/customScrollBehavior.dart';
 import 'package:flutter_catalog/models/advertisementItem.dart';
 import 'package:flutter_catalog/models/advertisementItemList.dart';
@@ -83,18 +84,13 @@ class _HomePage extends State<HomePage> {
                     ),
                   ),
                   ProductGridItemList(products: ProductList.products),
-                  // Ads
-                  // Footer?
-
-                  // CustomList(
-                  //   products: CatalogModel.items,
-                  // )
                 ],
               ),
             ),
           ),
         ),
       ),
+      bottomNavigationBar: HomePageBottomBar(),
     );
   }
 

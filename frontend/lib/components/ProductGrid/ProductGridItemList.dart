@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_catalog/models/product.dart';
 
 import 'ProductGridItem.dart';
-import 'customScrollBehavior.dart';
+import '../customScrollBehavior.dart';
 
 class ProductGridItemList extends StatelessWidget {
   final List<Product> products;

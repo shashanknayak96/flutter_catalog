@@ -1,10 +1,10 @@
 import "package:flutter/material.dart";
-import 'package:flutter_catalog/components/ProductItemDetail.dart';
-import 'package:flutter_catalog/components/TrendingIcon.dart';
+import 'package:flutter_catalog/components/ProductGrid/ProductItemDetail.dart';
+import 'package:flutter_catalog/components/Common/TrendingIcon.dart';
 import 'package:flutter_catalog/models/product.dart';
 import 'package:flutter_catalog/pages/ProductDetailPage.dart';
 
-import 'CartIcon.dart';
+import '../CartIcon.dart';
 
 class ProductGridItem extends StatelessWidget {
   final Product product;

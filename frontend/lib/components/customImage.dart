@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 
-import 'customTheme.dart';
+import 'Theme/customTheme.dart';
 
 class CustomImage extends StatelessWidget {
   final String image;

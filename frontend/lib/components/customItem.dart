@@ -5,7 +5,7 @@ import 'package:flutter_catalog/models/catalog.dart';
 import 'package:flutter_catalog/models/item.dart';
 
 import 'customImage.dart';
-import 'customTheme.dart';
+import 'Theme/customTheme.dart';
 
 class CustomItem extends StatelessWidget {
   final Item item;

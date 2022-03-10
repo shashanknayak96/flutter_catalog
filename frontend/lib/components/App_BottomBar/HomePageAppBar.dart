@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'OptionsDrawer.dart';
+import '../Drawer/OptionsDrawer.dart';
 
 class HomePageAppBar extends StatelessWidget with PreferredSizeWidget {
   const HomePageAppBar({Key? key}) : super(key: key);
@@ -14,6 +14,8 @@ class HomePageAppBar extends StatelessWidget with PreferredSizeWidget {
         leading: Padding(
           padding: const EdgeInsets.fromLTRB(16.0, 16.0, 0, 0),
           child: InkWell(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
             onTap: () {
               Scaffold.of(context).openDrawer();
             },

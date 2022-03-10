@@ -4,7 +4,7 @@ import 'package:flutter_catalog/components/addToCart.dart';
 import 'package:flutter_catalog/models/catalog.dart';
 import 'package:flutter_catalog/models/item.dart';
 
-import 'customTheme.dart';
+import 'Theme/customTheme.dart';
 
 class CustomDetail extends StatelessWidget {
   final Item item;

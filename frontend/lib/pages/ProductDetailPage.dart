@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
-import 'package:flutter_catalog/components/ProductItemDetail.dart';
-import 'package:flutter_catalog/components/customButton.dart';
+import 'package:flutter_catalog/components/App_BottomBar/CustomButton.dart';
+import 'package:flutter_catalog/components/App_BottomBar/DetailPageAppBar.dart';
+import 'package:flutter_catalog/components/ProductGrid/ProductItemDetail.dart';
 import 'package:flutter_catalog/models/product.dart';
 
 class ProductDetailPage extends StatelessWidget {
@@ -11,7 +12,7 @@ class ProductDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // APP BAR
-      appBar: AppBar(),
+      appBar: DetailPageAppBar(),
       body: Column(
         children: [
           ProductItemDetail(
