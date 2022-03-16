@@ -22,14 +22,12 @@ class CartList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 250,
       child: ListView.builder(
         itemCount: 2,
-        itemBuilder: (context, index) => Container(
-          child: CartListItem(
-            product: products[0],
-          ),
+        itemBuilder: (context, index) => CartListItem(
+          product: products[0],
         ),
       ),
     );

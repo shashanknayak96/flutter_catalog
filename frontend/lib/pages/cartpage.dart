@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:flutter_catalog/components/App_BottomBar/CartPageAppBar.dart';
+import 'package:flutter_catalog/components/App_BottomBar/CustomButton.dart';
 import 'package:flutter_catalog/components/Cart/CartList.dart';
 import 'package:flutter_catalog/core/CatalogStore.dart';
 import 'package:flutter_catalog/models/cart.dart';
@@ -84,32 +85,10 @@ class _CartTotal extends StatelessWidget {
             SizedBox(
               width: 30,
             ),
-            ElevatedButton(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    duration: Duration(seconds: 1),
-                    backgroundColor:
-                        Theme.of(context).snackBarTheme.backgroundColor,
-                    content: Text("Buy functionality will be added soon!"),
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                  primary: Theme.of(context).buttonColor),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 10.0,
-                  bottom: 10.0,
-                  left: 32.0,
-                  right: 32.0,
-                ),
-                child: Text(
-                  "BUY",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
+            Expanded(
+              child: CustomButton(
+                buttonName: "BUY",
+                color: Color(0xff64FCD9),
               ),
             )
           ],
