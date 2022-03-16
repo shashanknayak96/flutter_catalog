@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:flutter_catalog/pages/CartPage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePageBottomBar extends StatelessWidget {
@@ -23,8 +24,14 @@ class HomePageBottomBar extends StatelessWidget {
                 color: Theme.of(context).iconTheme.color),
           ),
           Container(
-            child: FaIcon(FontAwesomeIcons.shoppingCart,
-                color: Theme.of(context).iconTheme.color),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const CartPage()));
+              },
+              child: FaIcon(FontAwesomeIcons.shoppingCart,
+                  color: Theme.of(context).iconTheme.color),
+            ),
           ),
           Container(
             child: FaIcon(FontAwesomeIcons.userAlt,

@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import 'package:flutter_catalog/components/App_BottomBar/CartPageAppBar.dart';
+import 'package:flutter_catalog/components/Cart/CartList.dart';
 import 'package:flutter_catalog/core/CatalogStore.dart';
 import 'package:flutter_catalog/models/cart.dart';
 import 'package:store_keeper/store_keeper.dart';
@@ -9,22 +11,13 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-        title: Text(
-          "Cart",
-          style: TextStyle(color: Theme.of(context).primaryColor),
-        ),
-      ),
+      appBar: CartPageAppBar(),
       body: Column(
         children: [
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: _CartList(),
-            ),
+            child: CartList(),
           ),
-          _CartTotal()
+          _CartTotal(),
         ],
       ),
     );

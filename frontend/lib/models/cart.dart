@@ -8,6 +8,8 @@ class CartModel {
   CatalogModel _catalog = CatalogModel();
   final List<int> _itemIds = [];
 
+  final List<String> _productIds = [];
+
   CatalogModel get catalog => _catalog;
 
   set catalog(CatalogModel newModel) {

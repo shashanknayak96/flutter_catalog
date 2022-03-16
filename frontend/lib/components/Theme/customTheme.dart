@@ -34,6 +34,18 @@ class CustomTheme {
             fontWeight: FontWeight.w900,
             fontSize: 10.0,
           ),
+          // Product Price Text
+          subtitle1: TextStyle(
+            color: darkBlue,
+            fontWeight: FontWeight.w900,
+            fontSize: 20.0,
+          ),
+          // Product Price Number
+          subtitle2: TextStyle(
+            color: customRed,
+            fontWeight: FontWeight.w900,
+            fontSize: 20.0,
+          ),
         ),
         iconTheme: IconThemeData(
           color: darkBlue,
@@ -91,6 +103,7 @@ class CustomTheme {
   static Color white = Color(0xffffffff);
   static Color darkBlue = Color(0xff041C32);
   static Color lightBlue = Color(0xff64FCD9);
+  static Color customRed = Color(0xffDF362D);
 
   static Color offwhite = Color(0xffE7CFBC);
   static Color black = Color(0xff2d2d34);

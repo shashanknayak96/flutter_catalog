@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_catalog/components/Theme/customTheme.dart';
 import 'package:flutter_catalog/core/CatalogStore.dart';
-import 'package:flutter_catalog/pages/cartpage.dart';
+import 'package:flutter_catalog/pages/CartPage.dart';
 import 'package:flutter_catalog/pages/HomePage.dart';
 import 'package:flutter_catalog/pages/loginpage.dart';
 import 'package:flutter_catalog/pages/testPage.dart';
