@@ -1,8 +1,11 @@
 import "package:flutter/material.dart";
+import 'package:flutter_catalog/models/cart.dart';
+import 'package:flutter_catalog/models/product.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CartIcon extends StatelessWidget {
-  const CartIcon({Key? key}) : super(key: key);
+  final Product product;
+  const CartIcon({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,11 @@ class CartIcon extends StatelessWidget {
         alignment: Alignment.center,
         child: InkWell(
           onTap: () {
-            print("Bookmark");
+            AddProductMutation(product);
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Item added to cart!'),
+              duration: Duration(seconds: 1),
+            ));
           },
           child: FaIcon(
             FontAwesomeIcons.plus,

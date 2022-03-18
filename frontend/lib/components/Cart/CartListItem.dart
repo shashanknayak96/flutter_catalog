@@ -1,14 +1,26 @@
 import "package:flutter/material.dart";
 import 'package:flutter/rendering.dart';
+import 'package:flutter_catalog/core/CatalogStore.dart';
+import 'package:flutter_catalog/models/cart.dart';
 import 'package:flutter_catalog/models/product.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:store_keeper/store_keeper.dart';
 
-class CartListItem extends StatelessWidget {
+class CartListItem extends StatefulWidget {
   final Product product;
   const CartListItem({Key? key, required this.product}) : super(key: key);
 
   @override
+  State<CartListItem> createState() => _CartListItemState();
+}
+
+class _CartListItemState extends State<CartListItem> {
+  final _cart = (StoreKeeper.store as CatalogStore).cartModel;
+
+  @override
   Widget build(BuildContext context) {
+    StoreKeeper.listen(context,
+        to: [AddProductMutation, RemoveProductMutation, DeleteProductMutation]);
     return Padding(
         padding: const EdgeInsets.only(
           left: 8.0,
@@ -28,7 +40,7 @@ class CartListItem extends StatelessWidget {
                   padding: EdgeInsets.all(8.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.network(product.imageUrl),
+                    child: Image.network(widget.product.imageUrl),
                   ),
                 ),
               ),
@@ -40,11 +52,11 @@ class CartListItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        product.name,
+                        widget.product.name,
                         style: Theme.of(context).textTheme.headline3,
                       ),
                       Text(
-                        product.price.toString() + "₹",
+                        widget.product.price.toString() + "₹",
                         style: Theme.of(context).textTheme.headline1,
                       ),
                     ],
@@ -64,10 +76,15 @@ class CartListItem extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            FaIcon(
-                              FontAwesomeIcons.plusCircle,
-                              size: Theme.of(context).iconTheme.size,
-                              color: Theme.of(context).iconTheme.color,
+                            InkWell(
+                              onTap: () {
+                                AddProductMutation(widget.product);
+                              },
+                              child: FaIcon(
+                                FontAwesomeIcons.plusCircle,
+                                size: Theme.of(context).iconTheme.size,
+                                color: Theme.of(context).iconTheme.color,
+                              ),
                             ),
                             Stack(
                               alignment: Alignment.center,
@@ -80,25 +97,38 @@ class CartListItem extends StatelessWidget {
                                     color: Colors.white,
                                   ),
                                 ),
-                                Text("2",
+                                Text(
+                                    _cart
+                                        .productCount(widget.product.id)
+                                        .toString(),
                                     style:
                                         Theme.of(context).textTheme.headline2)
                               ],
                             ),
-                            FaIcon(
-                              FontAwesomeIcons.minusCircle,
-                              size: Theme.of(context).iconTheme.size,
-                              color: Theme.of(context).iconTheme.color,
+                            InkWell(
+                              onTap: () {
+                                RemoveProductMutation(widget.product);
+                              },
+                              child: FaIcon(
+                                FontAwesomeIcons.minusCircle,
+                                size: Theme.of(context).iconTheme.size,
+                                color: Theme.of(context).iconTheme.color,
+                              ),
                             )
                           ],
                         ),
                         SizedBox(
                           height: 10,
                         ),
-                        FaIcon(
-                          FontAwesomeIcons.dumpster,
-                          size: 18,
-                          color: Theme.of(context).iconTheme.color,
+                        InkWell(
+                          onTap: () {
+                            DeleteProductMutation(widget.product);
+                          },
+                          child: FaIcon(
+                            FontAwesomeIcons.trash,
+                            size: 18,
+                            color: Theme.of(context).iconTheme.color,
+                          ),
                         )
                       ],
                     ),

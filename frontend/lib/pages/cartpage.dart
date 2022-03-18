@@ -6,8 +6,15 @@ import 'package:flutter_catalog/core/CatalogStore.dart';
 import 'package:flutter_catalog/models/cart.dart';
 import 'package:store_keeper/store_keeper.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
+
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  final _cart = (StoreKeeper.store as CatalogStore).cartModel;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +23,9 @@ class CartPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: CartList(),
+            child: _cart.products.isEmpty
+                ? Text("Your cart is empty.")
+                : CartList(),
           ),
           _CartTotal(),
         ],
@@ -85,12 +94,12 @@ class _CartTotal extends StatelessWidget {
             SizedBox(
               width: 30,
             ),
-            Expanded(
-              child: CustomButton(
-                buttonName: "BUY",
-                color: Color(0xff64FCD9),
-              ),
-            )
+            // Expanded(
+            //   child: CustomButton(
+            //     buttonName: "BUY",
+            //     color: Color(0xff64FCD9),
+            //   ),
+            // )
           ],
         ),
       ),

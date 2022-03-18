@@ -1,14 +1,26 @@
 import "package:flutter/material.dart";
+import 'package:flutter_catalog/core/CatalogStore.dart';
+import 'package:flutter_catalog/models/cart.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../Drawer/OptionsDrawer.dart';
+import 'package:store_keeper/store_keeper.dart';
 import '../Common/CartCountIndicator.dart';
 
-class DetailPageAppBar extends StatelessWidget with PreferredSizeWidget {
+class DetailPageAppBar extends StatefulWidget with PreferredSizeWidget {
   const DetailPageAppBar({Key? key}) : super(key: key);
 
   @override
+  State<DetailPageAppBar> createState() => _DetailPageAppBarState();
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+}
+
+class _DetailPageAppBarState extends State<DetailPageAppBar> {
+  final _cart = (StoreKeeper.store as CatalogStore).cartModel;
+  @override
   Widget build(BuildContext context) {
+    StoreKeeper.listen(context,
+        to: [AddProductMutation, RemoveProductMutation, DeleteProductMutation]);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).backgroundColor,
@@ -39,7 +51,12 @@ class DetailPageAppBar extends StatelessWidget with PreferredSizeWidget {
                   size: Theme.of(context).iconTheme.size,
                 ),
               ),
-              CartCountIndicator(count: "2")
+              Positioned(
+                top: 10,
+                right: 10,
+                child:
+                    CartCountIndicator(count: _cart.products.length.toString()),
+              ),
             ],
           )
         ],
@@ -48,7 +65,4 @@ class DetailPageAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
     );
   }
-
-  @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }

@@ -91,18 +91,18 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 60,
                     ),
-                    CustomButton(
-                      buttonName: "Login",
-                      color: Colors.lightBlue.shade200,
-                      action: moveToHomePage,
-                    ),
+                    // CustomButton(
+                    //   buttonName: "Login",
+                    //   color: Colors.lightBlue.shade200,
+                    //   action: moveToHomePage,
+                    // ),
                     SizedBox(
                       height: 10,
                     ),
-                    CustomButton(
-                      buttonName: "Register",
-                      color: Colors.lightBlue.shade600,
-                    )
+                    // CustomButton(
+                    //   buttonName: "Register",
+                    //   color: Colors.lightBlue.shade600,
+                    // )
                   ],
                 ),
               )

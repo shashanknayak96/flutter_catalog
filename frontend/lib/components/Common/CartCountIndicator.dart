@@ -6,24 +6,20 @@ class CartCountIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: 10,
-      right: 10,
-      child: Container(
-        height: 20,
-        width: 20,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(
-            color: Colors.black,
-          ),
-          borderRadius: BorderRadius.circular(25),
+    return Container(
+      height: 20,
+      width: 20,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(
+          color: Colors.black,
         ),
-        child: Text(
-          count,
-          style: Theme.of(context).textTheme.headline5,
-        ),
+        borderRadius: BorderRadius.circular(25),
+      ),
+      child: Text(
+        count,
+        style: Theme.of(context).textTheme.headline5,
       ),
     );
   }

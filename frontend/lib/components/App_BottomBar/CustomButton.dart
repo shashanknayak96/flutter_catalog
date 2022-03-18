@@ -1,12 +1,20 @@
 import "package:flutter/material.dart";
+import 'package:flutter_catalog/models/cart.dart';
+import 'package:flutter_catalog/models/product.dart';
 import 'package:flutter_catalog/utils/routes.dart';
 
 class CustomButton extends StatefulWidget {
-  const CustomButton({Key? key, this.buttonName, this.color, this.action})
-      : super(key: key);
   final String? buttonName;
   final Color? color;
   final dynamic action;
+  final Product product;
+  const CustomButton(
+      {Key? key,
+      this.buttonName,
+      this.color,
+      this.action,
+      required this.product})
+      : super(key: key);
 
   @override
   State<CustomButton> createState() => _CustomButtonState();
@@ -20,7 +28,13 @@ class _CustomButtonState extends State<CustomButton> {
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: InkWell(
-          onTap: () => widget.action(context),
+          onTap: () => {
+            AddProductMutation(widget.product),
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Item added to cart!'),
+              duration: Duration(seconds: 1),
+            )),
+          },
           child: AnimatedContainer(
             duration: Duration(seconds: 1),
             height: 50,

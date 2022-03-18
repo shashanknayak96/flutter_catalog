@@ -54,7 +54,7 @@ class ProductGridItem extends StatelessWidget {
                   ),
                 ),
                 if (product.isTrending) TrendingIcon(),
-                CartIcon(),
+                CartIcon(product: product),
               ],
             ),
             Padding(

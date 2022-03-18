@@ -56,4 +56,8 @@ class Product {
 
 class ProductList {
   static List<Product> products = [];
+
+  Product getById(String id) {
+    return products.firstWhere((x) => x.id == id);
+  }
 }

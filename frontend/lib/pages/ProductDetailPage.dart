@@ -23,6 +23,7 @@ class ProductDetailPage extends StatelessWidget {
       bottomNavigationBar: CustomButton(
         buttonName: "ADD TO CART",
         color: Color(0xff64FCD9),
+        product: product,
       ),
     );
   }
