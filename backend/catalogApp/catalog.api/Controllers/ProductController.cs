@@ -32,13 +32,24 @@ public class ProductController : ControllerBase
     [HttpGet("{categoryName}")]
     public async Task<List<Product>> GetProductByCategoryName(string categoryName) 
     {
-        var product = await _productService.GeByCategoryNames(categoryName);
+        var product = await _productService.GetByCategoryName(categoryName);
         return product ?? null;
     }
 
-    // GET TRENDING 
-    // GET TOP 10
+    [HttpGet("{productName}")]
+    public async Task<List<Product>> GetProductByName(string productName) 
+    {
+        var product = await _productService.GetByProductName(productName);
+        return product ?? null;
+    }
     
+    [HttpGet]
+    public async Task<List<Product>> GetAllTrendingProducts(string productName) 
+    {
+        var product = await _productService.GetAllTrendingProducts(productName);
+        return product ?? null;
+    }
+
     [HttpPost]
     public async Task<IActionResult> AddUser(Product product)
     {

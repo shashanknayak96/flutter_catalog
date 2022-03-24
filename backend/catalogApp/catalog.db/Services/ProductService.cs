@@ -22,10 +22,15 @@ public class ProductService : IService<Product>
         await _databaseSet.getProductCollection().Find(x => x.Id == id).FirstOrDefaultAsync();
     #nullable disable
 
-    public async Task<List<Product>> GeByCategoryNames(string name) =>
+    public async Task<List<Product>> GetByCategoryName(string name) =>
         await _databaseSet.getProductCollection().Find(x => x.Category.Name.Contains(name, StringComparison.OrdinalIgnoreCase)).ToListAsync();
 
-    
+    public async Task<List<Product>> GetByProductName(string name) =>
+        await _databaseSet.getProductCollection().Find(x => x.Name.Contains(name, StringComparison.OrdinalIgnoreCase)).ToListAsync();
+
+    public async Task<List<Product>> GetAllTrendingProducts(string name) =>
+        await _databaseSet.getProductCollection().Find(x => x.IsTrending).ToListAsync();
+
     public async Task CreateAsync(Product product) =>
         await _databaseSet.getProductCollection().InsertOneAsync(product);
 
