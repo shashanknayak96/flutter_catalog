@@ -2,9 +2,10 @@ import "package:flutter/material.dart";
 import 'package:flutter_catalog/components/Common/CartCountIndicator.dart';
 import 'package:flutter_catalog/core/CatalogStore.dart';
 import 'package:flutter_catalog/models/cart.dart';
-import 'package:flutter_catalog/pages/CartPage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:store_keeper/store_keeper.dart';
+
+import '../../pages/cartpage.dart';
 
 class HomePageBottomBar extends StatefulWidget {
   const HomePageBottomBar({Key? key}) : super(key: key);

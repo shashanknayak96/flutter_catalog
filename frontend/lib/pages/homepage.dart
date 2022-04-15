@@ -23,6 +23,9 @@ class HomePage extends StatefulWidget {
 class _HomePage extends State<HomePage> {
   final int age = 25;
   final String name = "Shashank";
+  final String pcUrl = "http://192.168.31.101:8084/";
+  final String laptopUrl = "http://192.168.31.100/";
+  final bool isPc = false;
 
   @override
   void initState() {
@@ -97,7 +100,7 @@ class _HomePage extends State<HomePage> {
   loadAdvertisementData() async {
     try {
       var advertisementResponse = await http.get(
-        Uri.parse("http://192.168.31.101:8084/api/advertisement"),
+        Uri.parse(isPc ? pcUrl : laptopUrl + "api/advertisement"),
         headers: {
           "Accept": "application/json",
           "Access-Control-Allow-Origin": "*",
@@ -122,7 +125,7 @@ class _HomePage extends State<HomePage> {
   loadCategoryList() async {
     try {
       var categoryResponse = await http.get(
-        Uri.parse("http://192.168.31.101:8084/api/category"),
+        Uri.parse(isPc ? pcUrl : laptopUrl + "/api/category"),
         headers: {
           "Accept": "application/json",
           "Access-Control-Allow-Origin": "*",
@@ -148,7 +151,7 @@ class _HomePage extends State<HomePage> {
   loadProductList() async {
     try {
       var productResponse = await http.get(
-        Uri.parse("http://192.168.31.101:8084/api/product"),
+        Uri.parse(isPc ? pcUrl : laptopUrl + "api/product"),
         headers: {
           "Accept": "application/json",
           "Access-Control-Allow-Origin": "*",

@@ -15,21 +15,21 @@ public class ProductController : ControllerBase
         _productService = productService;
     }
 
-    [HttpGet]
-    public async Task<List<Product>> GetProduct() 
-    {
-        var products = await _productService.GetAsync();
-        return products;
-    }
+    // [HttpGet]
+    // public async Task<List<Product>> GetProduct() 
+    // {
+    //     var products = await _productService.GetAsync();
+    //     return products;
+    // }
 
-    [HttpGet("{id:length(24)}")]
+    [HttpGet("id/{id:length(24)}")]
     public async Task<Product> GetProductById(string Id) 
     {
         var product = await _productService.GetAsync(Id);
         return product ?? null;
     }
 
-    [HttpGet("{categoryName}")]
+    [HttpGet("category/{categoryName}")]
     public async Task<List<Product>> GetProductByCategoryName(string categoryName) 
     {
         var product = await _productService.GetByCategoryName(categoryName);
@@ -43,10 +43,10 @@ public class ProductController : ControllerBase
         return product ?? null;
     }
     
-    [HttpGet]
-    public async Task<List<Product>> GetAllTrendingProducts(string productName) 
+    [HttpGet("trending")]
+    public async Task<List<Product>> GetAllTrendingProducts() 
     {
-        var product = await _productService.GetAllTrendingProducts(productName);
+        var product = await _productService.GetAllTrendingProducts();
         return product ?? null;
     }
 
@@ -55,6 +55,6 @@ public class ProductController : ControllerBase
     {
         await _productService.CreateAsync(product);
 
-        return CreatedAtAction(nameof(GetProductById), new { id = product.Id }, product);
+        return CreatedAtAction(nameof(AddUser), new { id = product.Id }, product);
     }
 }
