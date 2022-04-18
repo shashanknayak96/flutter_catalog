@@ -22,9 +22,10 @@ public class ProductService : IService<Product>
         await _databaseSet.getProductCollection().Find(x => x.Id == id).FirstOrDefaultAsync();
     #nullable disable
 
-    public async Task<List<Product>> GetByCategoryName(string name){
-        var filter = Builders<Product>.Filter.Regex(x => x.Category, $"/{name}.*/i");
-        return await (await _databaseSet.getProductCollection().FindAsync(filter).ConfigureAwait(false)).ToListAsync();
+    public async Task<List<Product>> GetByCategoryName(string name){        
+        return await _databaseSet.getProductCollection().Find(x => x.Category.Name == name).ToListAsync();
+        // var filter = Builders<Product>.Filter.Regex(x => x.Category.Name, $"/{name}/i");
+        // return await (await _databaseSet.getProductCollection().FindAsync(filter).ConfigureAwait(false)).ToListAsync();
     }
 
     public async Task<List<Product>> GetByProductName(string name) {

@@ -29,17 +29,17 @@ public class ProductController : ControllerBase
         return product ?? null;
     }
 
-    [HttpGet("category/{categoryName}")]
-    public async Task<List<Product>> GetProductByCategoryName(string categoryName) 
+    [HttpGet("category")]
+    public async Task<List<Product>> GetProductByCategoryName([FromQuery] string name) 
     {
-        var product = await _productService.GetByCategoryName(categoryName);
+        var product = await _productService.GetByCategoryName(name);
         return product ?? null;
     }
 
-    [HttpGet("{productName}")]
-    public async Task<List<Product>> GetProductByName(string productName) 
+    [HttpGet]
+    public async Task<List<Product>> GetProductByName([FromQuery] string name) 
     {
-        var product = await _productService.GetByProductName(productName);
+        var product = await _productService.GetByProductName(name);
         return product ?? null;
     }
     
