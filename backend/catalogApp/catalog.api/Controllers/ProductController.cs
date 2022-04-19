@@ -51,10 +51,10 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddUser(Product product)
+    public async Task<IActionResult> AddProduct(Product product)
     {
         await _productService.CreateAsync(product);
 
-        return CreatedAtAction(nameof(AddUser), new { id = product.Id }, product);
+        return CreatedAtAction(nameof(AddProduct), new { id = product.Id }, product);
     }
 }

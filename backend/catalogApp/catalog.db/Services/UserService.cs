@@ -20,7 +20,15 @@ public class UserService : IService<User>
     public async Task<User?> GetAsync(string id) => 
         await _databaseSet.getUserCollection().Find(x => x.Id == id).FirstOrDefaultAsync();
     #nullable disable
-    
+
+    public async Task<User> GetUserByEmail(string email) => 
+        await _databaseSet.getUserCollection().Find(x => x.Email == email).FirstOrDefaultAsync();
+
+    public async Task<User> RegisterUser(User user) {
+        await _databaseSet.getUserCollection().InsertOneAsync(user);
+        return user;
+    }
+
     public async Task CreateAsync(User user) =>
         await _databaseSet.getUserCollection().InsertOneAsync(user);
 
