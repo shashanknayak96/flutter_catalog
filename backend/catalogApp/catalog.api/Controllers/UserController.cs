@@ -5,6 +5,7 @@ using catalog.db.Services;
 using catalog.db.Models;
 using catalog.api.Models.User;
 using catalog.api.Services;
+using catalog.api.Models;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -42,11 +43,20 @@ public class UserController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> RegisterUser(UserRegisterModel user)
+    public async Task<ApiResponse> RegisterUser(UserRegisterModel user)
     {
         var response = await _userControllerService.RegisterUser(user);
         if(!response.Success)
-            return Conflict();
-        return Ok(response.Token);
+            return new ApiResponse(409, response);
+        return new ApiResponse(200, response);
+    }
+
+    [HttpPost("login")]
+    public async Task<ApiResponse> LoginUser(UserLoginModel user)
+    {
+        var response = await _userControllerService.LoginUser(user);
+        if(!response.Success)
+            return new ApiResponse(404, response);
+        return new ApiResponse(200, response);
     }
 }

@@ -93,6 +93,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors();
 
 app.UseAuthentication();
+// app.UseAPIResponseWrapperMiddleware();
 
 app.UseAuthorization();
 

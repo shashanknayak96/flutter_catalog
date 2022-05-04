@@ -3,6 +3,7 @@ namespace catalog.api.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using catalog.db.Services;
 using catalog.db.Models;
+using catalog.api.Models;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -37,10 +38,10 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<List<Product>> GetProductByName([FromQuery] string name) 
+    public async Task<ApiResponse> GetProductByName([FromQuery] string name) 
     {
         var product = await _productService.GetByProductName(name);
-        return product ?? null;
+        return new ApiResponse(200, product ?? null);
     }
     
     [HttpGet("trending")]

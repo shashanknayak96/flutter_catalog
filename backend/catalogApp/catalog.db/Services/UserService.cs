@@ -29,6 +29,10 @@ public class UserService : IService<User>
         return user;
     }
 
+    public async Task<User> LoginUser(User user){
+        return await _databaseSet.getUserCollection().Find(x => x.Email == user.Email).FirstOrDefaultAsync();
+    }
+
     public async Task CreateAsync(User user) =>
         await _databaseSet.getUserCollection().InsertOneAsync(user);
 
