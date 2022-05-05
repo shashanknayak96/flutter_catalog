@@ -48,8 +48,6 @@ public class UserControllerService : IUserControllerService
 
 	public async Task<AuthenticationResult> LoginUser(UserLoginModel model)
 	{
-		var hashedPassword = EncryptionHelper.CreateHash(model.Password);
-
 		var userModel = new User {
 			Email = model.Email
 		};
@@ -60,7 +58,7 @@ public class UserControllerService : IUserControllerService
 				Error = new[] {"Incorrect email or password"}
 			};
 
-		var verifyPasswordResult = EncryptionHelper.Verify(user.Password, hashedPassword);
+		var verifyPasswordResult = EncryptionHelper.Verify(model.Password, user.Password);
 		if(!verifyPasswordResult)
 			return new AuthenticationResult
 			{
