@@ -1,24 +1,20 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using catalog.api.Helpers;
 using catalog.api.Models;
 using catalog.api.Models.User;
 using catalog.db.Models;
 using catalog.db.Services;
-using Microsoft.IdentityModel.Tokens;
 
 namespace catalog.api.Services;
 
 public class UserControllerService : IUserControllerService
 {
 	private readonly UserService _userService;
-	private readonly JwtSettings _jwtSettings;
+	private readonly ITokenService _tokenService;
 
-	public UserControllerService(UserService userService, JwtSettings jwtSettings)
+	public UserControllerService(UserService userService, ITokenService tokenService)
 	{
 		_userService = userService;
-		_jwtSettings = jwtSettings;
+		_tokenService = tokenService;
 	}
 
 	public async Task<AuthenticationResult> RegisterUser(UserRegisterModel model)
@@ -38,7 +34,7 @@ public class UserControllerService : IUserControllerService
 		};
 		var insertedUser = await _userService.RegisterUser(newUser);
 
-		var token = GenerateToken(insertedUser);
+		var token = _tokenService.GenerateAccessToken(insertedUser);
 		return new AuthenticationResult 
 		{
 			Token = token,
@@ -65,31 +61,20 @@ public class UserControllerService : IUserControllerService
 				Error = new[] {"Incorrect email or password"}
 			};
 
-		var token = GenerateToken(user);
+		var accessToken = _tokenService.GenerateAccessToken(user);
+		var refreshToken = _tokenService.GenerateRefreshToken();
+		
+		user.RefreshToken = refreshToken;
+		user.RefreshTokenExpirationDate = DateTime.Now.AddDays(15);
+
+		// TODO: Put method in trycatch and return 500 if it fails; return ApiResponse?
+		await _userService.UpdateAsync(user.Id, user);
+
+
 		return new AuthenticationResult{
-			Token = token,
+			Token = accessToken,
+			RefreshToken = refreshToken,
 			Success = true
 		};
-	}
-
-	// Private methods
-	private string GenerateToken(User userData)
-	{
-		var tokenHandler = new JwtSecurityTokenHandler();
-		var key = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
-		var tokenDescriptor = new SecurityTokenDescriptor
-		{
-			Subject = new ClaimsIdentity(
-				new [] {
-					new Claim(JwtRegisteredClaimNames.Sub, userData.Email),
-					new Claim(JwtRegisteredClaimNames.Email, userData.Email),
-					new Claim("id", userData.Id)
-				}),
-			Expires = DateTime.UtcNow.AddHours(2),
-			SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-		};
-
-		var token = tokenHandler.CreateToken(tokenDescriptor);
-		return tokenHandler.WriteToken(token);
 	}
 }

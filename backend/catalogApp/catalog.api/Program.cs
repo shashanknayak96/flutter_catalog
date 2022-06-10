@@ -23,6 +23,8 @@ builder.Services.AddSingleton<AdvertisementService>();
 builder.Services.AddSingleton<CategoryService>();
 builder.Services.AddSingleton<ProductService>();
 builder.Services.AddSingleton<IUserControllerService, UserControllerService>();
+builder.Services.AddSingleton<ITokenService, TokenService>();
+builder.Services.AddSingleton<ITokenControllerService, TokenControllerService>();
 
 builder.Services.AddCors(options =>
 {
@@ -45,6 +47,7 @@ builder.Services.AddAuthentication(x => {
 		ValidateLifetime = true,
 		ValidateIssuerSigningKey = true,
 		IssuerSigningKey = new SymmetricSecurityKey(key),
+		ClockSkew = TimeSpan.Zero
 	};
 });
 builder.Services.AddControllers();
