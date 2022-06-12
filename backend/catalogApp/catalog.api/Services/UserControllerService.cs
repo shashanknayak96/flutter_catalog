@@ -3,19 +3,22 @@ using catalog.api.Models;
 using catalog.api.Models.User;
 using catalog.db.Models;
 using catalog.db.Services;
+using catalog.db.Services.Interface;
 
 namespace catalog.api.Services;
 
 public class UserControllerService : IUserControllerService
 {
-	private readonly UserService _userService;
+	private readonly IUserService _userService;
 	private readonly ITokenService _tokenService;
+    private readonly IEncryptionHelper _encryptionHelper;
 
-	public UserControllerService(UserService userService, ITokenService tokenService)
+    public UserControllerService(IUserService userService, ITokenService tokenService, IEncryptionHelper encryptionHelper)
 	{
 		_userService = userService;
 		_tokenService = tokenService;
-	}
+        _encryptionHelper = encryptionHelper;
+    }
 
 	public async Task<AuthenticationResult> RegisterUser(UserRegisterModel model)
 	{
@@ -26,7 +29,7 @@ public class UserControllerService : IUserControllerService
 				Error = new[] {"User with email already exist."}
 			};
 
-		var hashedPassword = EncryptionHelper.CreateHash(model.Password);
+		var hashedPassword = _encryptionHelper.CreateHash(model.Password);
 		var newUser = new User {
 			Username = model.Email,
 			Email = model.Email,

@@ -76,4 +76,17 @@ public static class EncryptionHelper
 		}
 		return true;
 	}
+
+}
+public interface IEncryptionHelper
+{
+	public string CreateHash(string password);
+}
+
+public class EncryptionHelperClass : IEncryptionHelper
+{
+	public string CreateHash(string password)
+	{
+		return EncryptionHelper.CreateHash(password);
+	}
 }
