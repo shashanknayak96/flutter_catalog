@@ -78,15 +78,3 @@ public static class EncryptionHelper
 	}
 
 }
-public interface IEncryptionHelper
-{
-	public string CreateHash(string password);
-}
-
-public class EncryptionHelperClass : IEncryptionHelper
-{
-	public string CreateHash(string password)
-	{
-		return EncryptionHelper.CreateHash(password);
-	}
-}

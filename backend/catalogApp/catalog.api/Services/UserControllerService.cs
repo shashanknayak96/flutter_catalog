@@ -11,14 +11,12 @@ public class UserControllerService : IUserControllerService
 {
 	private readonly IUserService _userService;
 	private readonly ITokenService _tokenService;
-    private readonly IEncryptionHelper _encryptionHelper;
 
-    public UserControllerService(IUserService userService, ITokenService tokenService, IEncryptionHelper encryptionHelper)
+	public UserControllerService(IUserService userService, ITokenService tokenService)
 	{
 		_userService = userService;
 		_tokenService = tokenService;
-        _encryptionHelper = encryptionHelper;
-    }
+	}
 
 	public async Task<AuthenticationResult> RegisterUser(UserRegisterModel model)
 	{
@@ -29,7 +27,7 @@ public class UserControllerService : IUserControllerService
 				Error = new[] {"User with email already exist."}
 			};
 
-		var hashedPassword = _encryptionHelper.CreateHash(model.Password);
+		var hashedPassword = EncryptionHelper.CreateHash(model.Password);
 		var newUser = new User {
 			Username = model.Email,
 			Email = model.Email,
@@ -72,7 +70,6 @@ public class UserControllerService : IUserControllerService
 
 		// TODO: Put method in trycatch and return 500 if it fails; return ApiResponse?
 		await _userService.UpdateAsync(user.Id, user);
-
 
 		return new AuthenticationResult{
 			Token = accessToken,
