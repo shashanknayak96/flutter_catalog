@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using catalog.api.Helpers;
 using catalog.api.Models.User;
 using catalog.api.Services;
@@ -10,13 +12,13 @@ namespace catalog.integration.tests
 {
 	public class UserControllerServiceTest
 	{
-		private readonly UserControllerService _sut;
-		private readonly IUserService _userService = Substitute.For<IUserService>();
+		private readonly UserService _sut;
+		private readonly IService<User> _userService = Substitute.For<IService<User>>();
 		private readonly ITokenService _tokenService = Substitute.For<ITokenService>(); 
 
 		public UserControllerServiceTest()
 		{
-			_sut = new UserControllerService(_userService, _tokenService);
+			_sut = new UserService(_userService, _tokenService);
 		}
 
 		[Fact]
@@ -44,9 +46,9 @@ namespace catalog.integration.tests
 				Password = userPassword
 			};
 
-			_userService.GetUserByEmail(userEmail)
+			_userService.GetAsyncByFilter(x => x.Email == userEmail)
 				.ReturnsNull();
-			_userService.RegisterUser(Arg.Any<User>())
+			_userService.CreateAsync(Arg.Any<User>())
 				.Returns<User>(userInsertedModel);
 			_tokenService.GenerateAccessToken(userInsertedModel)
 				.Returns(accessToken);
@@ -78,8 +80,9 @@ namespace catalog.integration.tests
 				Email = userEmail,
 				Password = userPassword
 			};
-			_userService.GetUserByEmail(userEmail)
-				.Returns<User>(userModel);
+			var userModelList = new List<User>() {userModel};
+			_userService.GetAsyncByFilter(Arg.Any<Expression<Func<User, bool>>>())
+				.Returns<IEnumerable<User>>(userModelList);
 
 			// Act
 			var response = await _sut.RegisterUser(userRegisterModel);
@@ -109,9 +112,9 @@ namespace catalog.integration.tests
 				Email = userEmail,
 				Password = hashedPassword
 			};
-
-			_userService.LoginUser(Arg.Any<User>())
-				.Returns<User>(userModel);
+			var userModelList = new List<User>() {userModel};
+			_userService.GetAsyncByFilter(Arg.Any<Expression<Func<User, bool>>>())
+				.Returns<IEnumerable<User>>(userModelList);
 			_tokenService.GenerateAccessToken(userModel)
 				.Returns<string>(accessToken);
 			_tokenService.GenerateRefreshToken()
@@ -139,7 +142,7 @@ namespace catalog.integration.tests
 				Password = userPassword
 			};
 
-			_userService.LoginUser(Arg.Any<User>())
+			_userService.GetAsyncByFilter(x => x.Email == userLoginModel.Email)
 				.ReturnsNull();
 
 			// Act
@@ -148,7 +151,7 @@ namespace catalog.integration.tests
 			// Assert
 			Assert.False(response.Success);
 			Assert.NotNull(response.Error);
-			Assert.Equal(response.Error[0], "Incorrect email or password");
+			Assert.Equal("Incorrect email or password", response.Error[0]);
 		}
 
 		[Fact]
@@ -171,9 +174,9 @@ namespace catalog.integration.tests
 				Email = userEmail,
 				Password = userPassword
 			};
-
-			_userService.LoginUser(Arg.Any<User>())
-				.Returns<User>(userModel);
+			var userModelList = new List<User>() {userModel};
+			_userService.GetAsyncByFilter(x => x.Email == userLoginModel.Email)
+				.Returns<IEnumerable<User>>(userModelList);
 
 			// Act
 			var response = await _sut.LoginUser(userLoginModel);
@@ -181,7 +184,7 @@ namespace catalog.integration.tests
 			// Assert
 			Assert.False(response.Success);
 			Assert.NotNull(response.Error);
-			Assert.Equal(response.Error[0], "Incorrect email or password");
+			Assert.Equal("Incorrect email or password", response.Error[0]);
 		}
 	}
 }

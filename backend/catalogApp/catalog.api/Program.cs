@@ -1,8 +1,10 @@
 using System.Text;
 using catalog.api.Models;
 using catalog.api.Services;
+using catalog.api.Services.Interfaces;
 using catalog.db;
 using catalog.db.Services;
+using catalog.db.Services.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -18,13 +20,12 @@ builder.Services.AddSingleton(jwtSettings);
 builder.Services.AddSingleton<IDatabaseSettings, DatabaseSettings>();
 
 // Services
-builder.Services.AddSingleton<UserService>();
-builder.Services.AddSingleton<AdvertisementService>();
-builder.Services.AddSingleton<CategoryService>();
-builder.Services.AddSingleton<ProductService>();
-builder.Services.AddSingleton<IUserControllerService, UserControllerService>();
+builder.Services.AddSingleton(typeof(IService<>), typeof(Service<>));
+builder.Services.AddSingleton<IAdvertisementService, AdvertisementService>();
+builder.Services.AddSingleton<ICategoryService, CategoryService>();
+builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<ITokenService, TokenService>();
-builder.Services.AddSingleton<ITokenControllerService, TokenControllerService>();
+builder.Services.AddSingleton<IProductService, ProductService>();
 
 builder.Services.AddCors(options =>
 {

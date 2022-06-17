@@ -399,3 +399,5 @@ FodyWeavers.xsd
 
 **/bin/Debug/
 bin
+backend/catalogApp/.vscode/launch.json
+backend/catalogApp/.vscode/tasks.json

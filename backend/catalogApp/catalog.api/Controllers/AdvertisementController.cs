@@ -1,39 +1,55 @@
 namespace catalog.api.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
-using catalog.db.Services;
 using catalog.db.Models;
+using catalog.api.Models;
+using System.Net;
+using catalog.api.Services.Interfaces;
 
 [ApiController]
 [Route("api/[controller]")]
 public class AdvertisementController : ControllerBase
 {
-    private readonly AdvertisementService _advertisementService;
+	private readonly IAdvertisementService _advertisementControllerService;
 
-    public AdvertisementController(AdvertisementService advertisementService)
-    {
-        _advertisementService = advertisementService;
-    }
+	public AdvertisementController(IAdvertisementService advertisementControllerService)
+	{
+		_advertisementControllerService = advertisementControllerService;
+	}
 
-    [HttpGet]
-    public async Task<List<Advertisement>> GetUser() 
-    {
-        var users = await _advertisementService.GetAsync();
-        return users;
-    }
+	[HttpGet]
+	public async Task<ApiResponse> GetAdvertisements() 
+	{
+		var response = await _advertisementControllerService.GetAllAdvertisements();
+		if(response == null)
+			return new ApiResponse(HttpStatusCode.NotFound, null, "Advertisement records not found");
+		return new ApiResponse(HttpStatusCode.OK, response);
+	}
 
-    [HttpGet("{id:length(24)}")]
-    public async Task<Advertisement> GetUserById(string Id) 
-    {
-        var user = await _advertisementService.GetAsync(Id);
-        return user ?? null;
-    }
-    
-    [HttpPost]
-    public async Task<IActionResult> AddUser(Advertisement advertisement)
-    {
-        await _advertisementService.CreateAsync(advertisement);
-
-        return CreatedAtAction(nameof(GetUserById), new { id = advertisement.Id }, advertisement);
-    }
+	[HttpGet("{Id}")]
+	public async Task<ApiResponse> GetAdvertisementById(string Id) 
+	{
+		if (string.IsNullOrEmpty(Id))
+		{
+			return new ApiResponse(HttpStatusCode.BadRequest, null, "Id cannot be null or empty");
+		}
+		var response = await _advertisementControllerService.GetAdvertisementById(Id);
+		if(response == null)
+			return new ApiResponse(HttpStatusCode.NotFound, null, "Advertisement record not found");
+		return new ApiResponse(HttpStatusCode.OK, response);
+	}
+	
+	[HttpPost]
+	public async Task<ApiResponse> AddAdvertisement(Advertisement advertisementModel)
+	{
+		if(advertisementModel == null)
+		{
+			return new ApiResponse(HttpStatusCode.BadRequest, null, "Body cannot be null or empty");
+		}
+		
+		var response = await _advertisementControllerService.AddAdvertisement(advertisementModel);
+		if(response == null)
+			return new ApiResponse(HttpStatusCode.InternalServerError, null, "Advertisement record cannot be added");
+		return new ApiResponse(HttpStatusCode.OK, response);
+	}
 }

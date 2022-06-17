@@ -1,39 +1,54 @@
 namespace catalog.api.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
-using catalog.db.Services;
 using catalog.db.Models;
+using catalog.api.Services;
+using catalog.api.Models;
+using System.Net;
 
 [ApiController]
 [Route("api/[controller]")]
 public class CategoryController : ControllerBase
 {
-    private readonly CategoryService _categoryService;
+	private readonly CategoryService _categoryService;
 
-    public CategoryController(CategoryService categoryService)
-    {
-        _categoryService = categoryService;
-    }
+	public CategoryController(CategoryService categoryService)
+	{
+		_categoryService = categoryService;
+	}
 
-    [HttpGet]
-    public async Task<List<Category>> GetCategory() 
-    {
-        var categories = await _categoryService.GetAsync();
-        return categories;
-    }
+	[HttpGet]
+	public async Task<ApiResponse> GetCategory() 
+	{
+		var categories = await _categoryService.GetAllCategories();
+		if (categories == null)
+			return new ApiResponse(HttpStatusCode.NotFound, null, "Categories not found");
+		return new ApiResponse(HttpStatusCode.OK, categories);
+	}
 
-    [HttpGet("{id:length(24)}")]
-    public async Task<Category> GetCategoryById(string Id) 
-    {
-        var category = await _categoryService.GetAsync(Id);
-        return category ?? null;
-    }
-    
-    [HttpPost]
-    public async Task<IActionResult> AddUser(Category category)
-    {
-        await _categoryService.CreateAsync(category);
-
-        return CreatedAtAction(nameof(GetCategoryById), new { id = category.Id }, category);
-    }
+	[HttpGet("{Id}")]
+	public async Task<ApiResponse> GetCategoryById(string Id) 
+	{
+		if(string.IsNullOrEmpty(Id))
+		{
+			return new ApiResponse(HttpStatusCode.BadRequest, null, "Category Id cannot be null or empty");
+		}
+		var category = await _categoryService.GetCategoryById(Id);
+		if (category == null)
+			return new ApiResponse(HttpStatusCode.NotFound, null, "Categories not found");
+		return new ApiResponse(HttpStatusCode.OK, category);
+	}
+	
+	[HttpPost]
+	public async Task<ApiResponse> AddCategory(Category category)
+	{
+		if(category == null)
+		{
+			return new ApiResponse(HttpStatusCode.BadRequest, null, "Category model cannot be null or empty");
+		}
+		var response = await _categoryService.AddCategory(category);
+		if (category == null)
+			return new ApiResponse(HttpStatusCode.InternalServerError, null, "Categorie cannot be added.");
+		return new ApiResponse(HttpStatusCode.OK, category);
+	}
 }

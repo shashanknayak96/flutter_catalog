@@ -1,3 +1,4 @@
+using System.Net;
 using System.Runtime.Serialization;
 
 namespace catalog.api.Models;
@@ -17,7 +18,7 @@ public class ApiResponse
 	[DataMember(EmitDefaultValue = false)]
 	public object Result { get; set; }
 
-	public ApiResponse(int statusCode, object result = null, string errorMessage = null)
+	public ApiResponse(HttpStatusCode statusCode, object result = null, string errorMessage = null)
 	{
 		StatusCode = (int)statusCode;
 		Result = result;

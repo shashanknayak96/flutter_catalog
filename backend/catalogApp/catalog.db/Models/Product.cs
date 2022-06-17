@@ -3,13 +3,8 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace catalog.db.Models;
 
-public class Product
+public class Product : Base
 {
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    #nullable enable
-    public string? Id { get; set; }
-    #nullable disable
     public string Name { get; set; }
     public string Description { get; set; }
     public string ImageUrl { get; set; }

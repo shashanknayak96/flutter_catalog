@@ -5,60 +5,80 @@ using catalog.db.Services;
 using catalog.db.Models;
 using catalog.api.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Net;
+using catalog.api.Services.Interfaces;
 
 [ApiController]
 [Route("api/[controller]")]
 public class ProductController : ControllerBase
 {
-	private readonly ProductService _productService;
+	private readonly IProductService _productService;
 
-	public ProductController(ProductService productService)
+	public ProductController(IProductService productService)
 	{
 		_productService = productService;
 	}
 
-	// [HttpGet]
-	// public async Task<List<Product>> GetProduct() 
-	// {
-	//     var products = await _productService.GetAsync();
-	//     return products;
-	// }
-
-	[HttpGet("id/{id:length(24)}")]
-	public async Task<Product> GetProductById(string Id) 
+	[HttpGet("id")]
+	public async Task<ApiResponse> GetProductById(string id) 
 	{
-		var product = await _productService.GetAsync(Id);
-		return product ?? null;
+		if(string.IsNullOrEmpty(id))
+		{
+			return new ApiResponse(HttpStatusCode.BadRequest, null, "Id cannot be null or empty");
+		}
+		var response = await _productService.GetProductsById(id);
+		if(response == null)
+			return new ApiResponse(HttpStatusCode.NotFound, null, "Product record not found");
+		return new ApiResponse(HttpStatusCode.OK, response);
 	}
 
 	[Authorize]
 	[HttpGet("category")]
-	public async Task<List<Product>> GetProductByCategoryName([FromQuery] string name) 
+	public async Task<ApiResponse> GetProductByCategoryName([FromQuery] string name) 
 	{
-		var product = await _productService.GetByCategoryName(name);
-		return product ?? null;
+		if (string.IsNullOrEmpty(name))
+		{
+			return new ApiResponse(HttpStatusCode.BadRequest, null, "Category name cannot be null or empty");
+		}
+		var response = await _productService.GetProductsByCategoryName(name);
+		if(response == null)
+			return new ApiResponse(HttpStatusCode.NotFound, null, "Product record not found");
+		return new ApiResponse(HttpStatusCode.OK, response);
 	}
 
 	[Authorize]
 	[HttpGet]
 	public async Task<ApiResponse> GetProductByName([FromQuery] string name) 
 	{
-		var product = await _productService.GetByProductName(name);
-		return new ApiResponse(200, product ?? null);
+		if (string.IsNullOrEmpty(name))
+		{
+			return new ApiResponse(HttpStatusCode.BadRequest, null, "Category name cannot be null or empty");
+		}
+		var response = await _productService.GetProductsByName(name);
+		if(response == null)
+			return new ApiResponse(HttpStatusCode.NotFound, null, "Product record not found");
+		return new ApiResponse(HttpStatusCode.OK, response);
 	}
 	
 	[HttpGet("trending")]
-	public async Task<List<Product>> GetAllTrendingProducts() 
+	public async Task<ApiResponse> GetAllTrendingProducts() 
 	{
-		var product = await _productService.GetAllTrendingProducts();
-		return product ?? null;
+		var response = await _productService.GetAllTrendingProducts();
+		if(response == null)
+			return new ApiResponse(HttpStatusCode.NotFound, null, "No trending products found");
+		return new ApiResponse(HttpStatusCode.OK, response);
 	}
 
 	[HttpPost]
-	public async Task<IActionResult> AddProduct(Product product)
+	public async Task<ApiResponse> AddProduct(Product product)
 	{
-		await _productService.CreateAsync(product);
-
-		return CreatedAtAction(nameof(AddProduct), new { id = product.Id }, product);
+		if (product == null)
+		{
+			return new ApiResponse(HttpStatusCode.BadRequest, null, "Product name cannot be null or empty");
+		}
+		var response = await _productService.AddProduct(product);
+		if(response == null)
+			return new ApiResponse(HttpStatusCode.InternalServerError, null, "Product cannot be added");
+		return new ApiResponse(HttpStatusCode.OK, response);
 	}
 }
