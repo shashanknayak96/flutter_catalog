@@ -54,6 +54,7 @@ builder.Services.AddAuthentication(x => {
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSignalR();
 
 
 builder.Services.AddSwaggerGen(x => {
@@ -99,5 +100,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<MessageHub>("/message");
 
 app.Run();

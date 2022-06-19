@@ -39,6 +39,7 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   http: ^0.13.4
   font_awesome_flutter: ^9.2.0
+  signalr_client: ^0.1.6
   
 dev_dependencies:
   flutter_test:

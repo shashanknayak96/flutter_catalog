@@ -14,6 +14,7 @@ import 'package:flutter_catalog/models/category.dart';
 import 'package:flutter_catalog/models/categoryList.dart';
 import 'package:flutter_catalog/models/product.dart';
 import "package:http/http.dart" as http;
+import 'package:signalr_client/hub_connection_builder.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -25,7 +26,7 @@ class _HomePage extends State<HomePage> {
   final String name = "Shashank";
   final String pcUrl = "http://192.168.31.101:8084/";
   final String laptopUrl = "http://192.168.31.100/";
-  final bool isPc = false;
+  final bool isPc = true;
 
   @override
   void initState() {
@@ -43,8 +44,24 @@ class _HomePage extends State<HomePage> {
     //     List.from(productData).map<Item>((item) => Item.fromMap(item)).toList();
 
     await loadAdvertisementData();
-    await loadCategoryList();
-    await loadProductList();
+    // await loadCategoryList();
+    // await loadProductList();
+
+    // SIGNALR Implementation
+
+    // The location of the SignalR Server.
+    const serverUrl = "http://192.168.31.101:8084/api/broadcast";
+    // Creates the connection by using the HubConnectionBuilder.
+    var hubConnection = HubConnectionBuilder().withUrl(serverUrl).build();
+    print(serverUrl);
+    print("Starting signalr server");
+
+    await hubConnection.start().then((value) => {print("Server started")});
+    // When the connection is closed, print out a message to the console.
+
+    hubConnection.on("ReceiveMessage", _receiveMessageFromServer);
+    hubConnection.onclose((error) => print("Connection Closed"));
+
     setState(() {});
   }
 
@@ -100,7 +117,7 @@ class _HomePage extends State<HomePage> {
   loadAdvertisementData() async {
     try {
       var advertisementResponse = await http.get(
-        Uri.parse(isPc ? pcUrl : laptopUrl + "api/advertisement"),
+        Uri.parse((isPc ? pcUrl : laptopUrl) + "api/advertisement"),
         headers: {
           "Accept": "application/json",
           "Access-Control-Allow-Origin": "*",
@@ -113,7 +130,8 @@ class _HomePage extends State<HomePage> {
       );
       if (advertisementResponse.statusCode == 200) {
         var decodedAdvertisementData = jsonDecode(advertisementResponse.body);
-        AdvertisementItemList.items = List.from(decodedAdvertisementData)
+        AdvertisementItemList.items = List.from(
+                decodedAdvertisementData["result"])
             .map<AdvertisementItem>((item) => AdvertisementItem.fromJson(item))
             .toList();
       }
@@ -171,5 +189,9 @@ class _HomePage extends State<HomePage> {
     } on SocketException {
       print("No internet connection.");
     }
+  }
+
+  void _receiveMessageFromServer(var message) {
+    print(message);
   }
 }
