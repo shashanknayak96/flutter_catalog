@@ -4,10 +4,15 @@ import "package:flutter/material.dart";
 import 'package:flutter_catalog/components/Advertisement/AdvertisingItemList.dart';
 import 'package:flutter_catalog/components/App_BottomBar/HomePageAppBar.dart';
 import 'package:flutter_catalog/components/App_BottomBar/HomePageBottomBar.dart';
+import 'package:flutter_catalog/components/Button/CustomButtonTest.dart';
+import 'package:flutter_catalog/components/Button/NotificationPage.dart';
 import 'package:flutter_catalog/components/CategoryButton/CategoryButtomItemList.dart';
 import 'package:flutter_catalog/components/Drawer/OptionsDrawer.dart';
 import 'package:flutter_catalog/components/ProductGrid/ProductGridItemList.dart';
 import 'package:flutter_catalog/components/customScrollBehavior.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
+
+import '../components/App_BottomBar/CustomButton.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -24,6 +29,35 @@ class _HomePage extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
+    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+      if (!isAllowed) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text("test"),
+            content: Text("contnet"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("Dont Allow"),
+              ),
+              TextButton(
+                onPressed: () {
+                  AwesomeNotifications()
+                      .requestPermissionToSendNotifications()
+                      .then((_) => Navigator.pop(context));
+                },
+                child: Text("Allow"),
+              )
+            ],
+          ),
+        );
+      }
+    });
+
     loadData();
   }
 
@@ -78,6 +112,8 @@ class _HomePage extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  CustomButtonTest(),
+                  NotificationPage(),
                   CustomAdvertisingItemList(),
                   CategoryButtonItemList(),
                   Padding(
