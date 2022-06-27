@@ -8,7 +8,10 @@ import 'package:flutter_catalog/pages/testPage.dart';
 import 'package:flutter_catalog/utils/routes.dart';
 import 'package:store_keeper/store_keeper.dart';
 
+import 'services/ServiceLocator.dart';
+
 void main() {
+  setupServiceLocator();
   runApp(StoreKeeper(
     store: CatalogStore(),
     child: MyApp(),

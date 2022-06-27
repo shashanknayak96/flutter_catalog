@@ -1,14 +1,29 @@
 import "package:flutter/material.dart";
+import 'package:flutter_catalog/components/Shimmer/CustomShimmer.dart';
 import 'package:flutter_catalog/models/product.dart';
+import 'package:flutter_catalog/services/AbstractServices/AbstractProductService.dart';
 
+import '../../services/ServiceLocator.dart';
 import 'ProductGridItem.dart';
 import '../customScrollBehavior.dart';
 
-class ProductGridItemList extends StatelessWidget {
-  final List<Product> products;
+class ProductGridItemList extends StatefulWidget {
+  const ProductGridItemList({Key? key}) : super(key: key);
 
-  const ProductGridItemList({Key? key, required this.products})
-      : super(key: key);
+  @override
+  State<ProductGridItemList> createState() => _ProductGridItemListState();
+}
+
+class _ProductGridItemListState extends State<ProductGridItemList> {
+  List<Product> productList = [];
+  final AbstractProductService _productService =
+      getIt<AbstractProductService>();
+
+  @override
+  void initState() {
+    super.initState();
+    loadProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +35,28 @@ class ProductGridItemList extends StatelessWidget {
           physics: ScrollPhysics(),
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
-          itemCount: products.length,
+          itemCount: productList.isEmpty ? 10 : productList.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 0.80,
           ),
           itemBuilder: (context, index) {
-            return ProductGridItem(product: products[index]);
+            return 1 == 1 //productList.isEmpty
+                ? CustomShimmer(
+                    width: 175,
+                    height: 175,
+                    padding: 8.0,
+                    roundedCorners: true,
+                  )
+                : ProductGridItem(product: productList[index]);
           },
         ),
       ),
     );
+  }
+
+  void loadProducts() async {
+    productList = await _productService.getProducts();
+    setState(() {});
   }
 }

@@ -40,6 +40,9 @@ dependencies:
   http: ^0.13.4
   font_awesome_flutter: ^9.2.0
   signalr_client: ^0.1.6
+  shimmer: ^2.0.0
+  get_it: ^7.2.0
+  awesome_notifications: any
   
 dev_dependencies:
   flutter_test:

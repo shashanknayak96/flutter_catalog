@@ -29,10 +29,13 @@ builder.Services.AddSingleton<IProductService, ProductService>();
 
 builder.Services.AddCors(options =>
 {
+	options.DefaultPolicyName = "signalR";
 	options.AddDefaultPolicy(builder =>
 	{
-		builder.WithOrigins("*").AllowAnyHeader()
-							.AllowAnyMethod();
+		builder.AllowAnyHeader()
+			.AllowAnyMethod()
+			.AllowCredentials()
+			.SetIsOriginAllowed(hostname => true);
 	});
 });
 

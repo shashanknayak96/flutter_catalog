@@ -8,15 +8,10 @@ import 'package:flutter_catalog/components/CategoryButton/CategoryButtomItemList
 import 'package:flutter_catalog/components/Drawer/OptionsDrawer.dart';
 import 'package:flutter_catalog/components/ProductGrid/ProductGridItemList.dart';
 import 'package:flutter_catalog/components/customScrollBehavior.dart';
-import 'package:flutter_catalog/models/advertisementItem.dart';
-import 'package:flutter_catalog/models/advertisementItemList.dart';
-import 'package:flutter_catalog/models/category.dart';
-import 'package:flutter_catalog/models/categoryList.dart';
-import 'package:flutter_catalog/models/product.dart';
-import "package:http/http.dart" as http;
-import 'package:signalr_client/hub_connection_builder.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   _HomePage createState() => _HomePage();
 }
@@ -24,9 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePage extends State<HomePage> {
   final int age = 25;
   final String name = "Shashank";
-  final String pcUrl = "http://192.168.31.101:8084/";
-  final String laptopUrl = "http://192.168.31.100/";
-  final bool isPc = true;
+  String data = "SOMETHING";
 
   @override
   void initState() {
@@ -43,24 +36,20 @@ class _HomePage extends State<HomePage> {
     // CatalogModel.items =
     //     List.from(productData).map<Item>((item) => Item.fromMap(item)).toList();
 
-    await loadAdvertisementData();
-    // await loadCategoryList();
-    // await loadProductList();
-
     // SIGNALR Implementation
 
     // The location of the SignalR Server.
-    const serverUrl = "http://192.168.31.101:8084/api/broadcast";
+    const serverUrl = "http://192.168.31.100/message";
     // Creates the connection by using the HubConnectionBuilder.
-    var hubConnection = HubConnectionBuilder().withUrl(serverUrl).build();
-    print(serverUrl);
-    print("Starting signalr server");
+    // var hubConnection = HubConnectionBuilder().withUrl(serverUrl).build();
+    // print(serverUrl);
+    // print("Starting signalr server");
 
-    await hubConnection.start().then((value) => {print("Server started")});
+    // await hubConnection.start();
     // When the connection is closed, print out a message to the console.
 
-    hubConnection.on("ReceiveMessage", _receiveMessageFromServer);
-    hubConnection.onclose((error) => print("Connection Closed"));
+    // hubConnection.on("ReceiveMessage", _receiveMessageFromServer);
+    // hubConnection.onclose((error) => print("Connection Closed"));
 
     setState(() {});
   }
@@ -89,13 +78,8 @@ class _HomePage extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // CustomDeliveryAddress(),
-                  CustomAdvertisingItemList(
-                    advertisementItems: AdvertisementItemList.items,
-                  ),
-                  CategoryButtonItemList(
-                    categoryList: CategoryList.items,
-                  ),
+                  CustomAdvertisingItemList(),
+                  CategoryButtonItemList(),
                   Padding(
                     padding: const EdgeInsets.only(left: 16.0, top: 16.0),
                     child: Text(
@@ -103,7 +87,7 @@ class _HomePage extends State<HomePage> {
                       style: Theme.of(context).textTheme.headline3,
                     ),
                   ),
-                  ProductGridItemList(products: ProductList.products),
+                  ProductGridItemList(),
                 ],
               ),
             ),
@@ -114,84 +98,12 @@ class _HomePage extends State<HomePage> {
     );
   }
 
-  loadAdvertisementData() async {
-    try {
-      var advertisementResponse = await http.get(
-        Uri.parse((isPc ? pcUrl : laptopUrl) + "api/advertisement"),
-        headers: {
-          "Accept": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Credentials":
-              "true", // Required for cookies, authorization headers with HTTPS
-          "Access-Control-Allow-Headers":
-              "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-          "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
-        },
-      );
-      if (advertisementResponse.statusCode == 200) {
-        var decodedAdvertisementData = jsonDecode(advertisementResponse.body);
-        AdvertisementItemList.items = List.from(
-                decodedAdvertisementData["result"])
-            .map<AdvertisementItem>((item) => AdvertisementItem.fromJson(item))
-            .toList();
-      }
-    } on SocketException {
-      print("No internet connection.");
-    }
-  }
-
-  loadCategoryList() async {
-    try {
-      var categoryResponse = await http.get(
-        Uri.parse(isPc ? pcUrl : laptopUrl + "/api/category"),
-        headers: {
-          "Accept": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Credentials":
-              "true", // Required for cookies, authorization headers with HTTPS
-          "Access-Control-Allow-Headers":
-              "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-          "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
-        },
-      );
-
-      if (categoryResponse.statusCode == 200) {
-        var decodedCategoryData = jsonDecode(categoryResponse.body);
-        CategoryList.items = List.from(decodedCategoryData)
-            .map<Category>((item) => Category.fromJson(item))
-            .toList();
-      }
-    } on SocketException {
-      print("No internet connection.");
-    }
-  }
-
-  loadProductList() async {
-    try {
-      var productResponse = await http.get(
-        Uri.parse(isPc ? pcUrl : laptopUrl + "api/product"),
-        headers: {
-          "Accept": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Credentials": "true",
-          "Access-Control-Allow-Headers":
-              "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-          "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
-        },
-      );
-
-      if (productResponse.statusCode == 200) {
-        var decodedProductData = jsonDecode(productResponse.body);
-        ProductList.products = List.from(decodedProductData)
-            .map<Product>((item) => Product.fromJson(item))
-            .toList();
-      }
-    } on SocketException {
-      print("No internet connection.");
-    }
-  }
-
   void _receiveMessageFromServer(var message) {
-    print(message);
+    if (message != "" || message != null) {
+      setState(() {
+        data = message[0].toString();
+      });
+      print(message);
+    }
   }
 }

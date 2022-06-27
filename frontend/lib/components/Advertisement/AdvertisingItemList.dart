@@ -1,17 +1,18 @@
 import 'dart:async';
 
 import "package:flutter/material.dart";
-import 'package:flutter_catalog/models/advertisementItem.dart';
-import 'package:flutter_catalog/models/advertisementItemList.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_catalog/components/Shimmer/CustomShimmer.dart';
 
+import '../../models/advertisementItem.dart';
+import '../../services/AdvertisementService.dart';
+import '../../services/AbstractServices/AbstractAdvertisementService.dart';
+import '../../services/ServiceLocator.dart';
 import 'AdvertisingItem.dart';
 import '../customScrollBehavior.dart';
 
 class CustomAdvertisingItemList extends StatefulWidget {
-  final List<AdvertisementItem> advertisementItems;
-  const CustomAdvertisingItemList({Key? key, required this.advertisementItems})
-      : super(key: key);
+  // final List<AdvertisementItem> advertisementItems;
+  const CustomAdvertisingItemList({Key? key}) : super(key: key);
 
   @override
   State<CustomAdvertisingItemList> createState() =>
@@ -19,18 +20,21 @@ class CustomAdvertisingItemList extends StatefulWidget {
 }
 
 class _CustomAdvertisingListState extends State<CustomAdvertisingItemList> {
-  int _currentPage = 0;
+  final int _currentPage = 0;
   late Timer _timer;
-  PageController _pageController = PageController(
+  final PageController _pageController = PageController(
     viewportFraction: 1,
     keepPage: true,
     initialPage: 0,
   );
+  List<AdvertisementItem> advertisementItemsTest = [];
+  final AbstractAdvertisementService _advertisementService =
+      getIt<AbstractAdvertisementService>();
 
   @override
   void initState() {
     super.initState();
-
+    loadData();
     // _timer = Timer.periodic(
     //   Duration(seconds: 5),
     //   (Timer timer) {
@@ -68,10 +72,19 @@ class _CustomAdvertisingListState extends State<CustomAdvertisingItemList> {
                 controller: _pageController,
                 scrollDirection: Axis.horizontal,
                 // shrinkWrap: true,
-                itemCount: widget.advertisementItems.length,
+                itemCount: advertisementItemsTest.isEmpty
+                    ? 2
+                    : advertisementItemsTest.length,
                 itemBuilder: (context, index) {
-                  return CustomAdvertisingItem(
-                      item: widget.advertisementItems[index]);
+                  return advertisementItemsTest.isEmpty
+                      ? CustomShimmer(
+                          height: 200,
+                          width: double.infinity,
+                          padding: 8.0,
+                          roundedCorners: true,
+                        )
+                      : CustomAdvertisingItem(
+                          item: advertisementItemsTest[index]);
                 },
               ),
             ),
@@ -89,5 +102,10 @@ class _CustomAdvertisingListState extends State<CustomAdvertisingItemList> {
         ],
       ),
     );
+  }
+
+  void loadData() async {
+    advertisementItemsTest = await _advertisementService.getAdvertisements();
+    setState(() {});
   }
 }
