@@ -111,3 +111,6 @@ class CustomTheme {
   static Color blue = Color(0xff50A2A7);
   static Color yellow = Color(0xffE9B44C);
 }
+
+// TODO: Fix color palette
+Color lightBlue = Color(0xff64FCD9);

@@ -5,6 +5,7 @@ import 'package:flutter_catalog/pages/cartpage.dart';
 import 'package:flutter_catalog/pages/homepage.dart';
 import 'package:flutter_catalog/pages/loginpage.dart';
 import 'package:flutter_catalog/pages/testPage.dart';
+import 'package:flutter_catalog/services/NotificationService.dart';
 import 'package:flutter_catalog/utils/routes.dart';
 import 'package:store_keeper/store_keeper.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
@@ -14,19 +15,7 @@ import 'services/ServiceLocator.dart';
 
 void main() {
   setupServiceLocator();
-
-  AwesomeNotifications().initialize(
-      null,
-      [
-        NotificationChannel(
-            channelGroupKey: 'basic_channel_group',
-            channelKey: 'basic_channel',
-            channelName: 'Basic Notifications For App',
-            channelDescription: 'Notification channel for catalog app',
-            defaultColor: Color(0xFF9D50DD),
-            importance: NotificationImportance.High)
-      ],
-      debug: true);
+  createNotificationChannel();
 
   runApp(StoreKeeper(
     store: CatalogStore(),

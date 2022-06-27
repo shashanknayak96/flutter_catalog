@@ -57,6 +57,7 @@ class _ProductGridItemListState extends State<ProductGridItemList> {
 
   void loadProducts() async {
     productList = await _productService.getProducts();
+    print(productList);
     setState(() {});
   }
 }

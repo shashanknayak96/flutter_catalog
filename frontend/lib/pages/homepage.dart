@@ -11,8 +11,11 @@ import 'package:flutter_catalog/components/Drawer/OptionsDrawer.dart';
 import 'package:flutter_catalog/components/ProductGrid/ProductGridItemList.dart';
 import 'package:flutter_catalog/components/customScrollBehavior.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:signalr_client/signalr_client.dart';
 
 import '../components/App_BottomBar/CustomButton.dart';
+import '../components/Theme/customTheme.dart';
+import '../services/NotificationService.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -35,23 +38,33 @@ class _HomePage extends State<HomePage> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text("test"),
-            content: Text("contnet"),
+            backgroundColor: Colors.white,
+            title: Text("Catalog App"),
+            content: Text(
+              "Would you like to receive notifications from our application?",
+            ),
             actions: [
               TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("Dont Allow"),
-              ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("Dont Allow",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 18.0,
+                      ))),
               TextButton(
-                onPressed: () {
-                  AwesomeNotifications()
-                      .requestPermissionToSendNotifications()
-                      .then((_) => Navigator.pop(context));
-                },
-                child: Text("Allow"),
-              )
+                  onPressed: () {
+                    AwesomeNotifications()
+                        .requestPermissionToSendNotifications()
+                        .then((_) => Navigator.pop(context));
+                  },
+                  child: Text("Allow",
+                      style: TextStyle(
+                        color: lightBlue,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      )))
             ],
           ),
         );
@@ -75,15 +88,14 @@ class _HomePage extends State<HomePage> {
     // The location of the SignalR Server.
     const serverUrl = "http://192.168.31.100/message";
     // Creates the connection by using the HubConnectionBuilder.
-    // var hubConnection = HubConnectionBuilder().withUrl(serverUrl).build();
-    // print(serverUrl);
-    // print("Starting signalr server");
+    var hubConnection = HubConnectionBuilder().withUrl(serverUrl).build();
+    print("Starting signalr server");
 
-    // await hubConnection.start();
+    await hubConnection.start();
     // When the connection is closed, print out a message to the console.
 
-    // hubConnection.on("ReceiveMessage", _receiveMessageFromServer);
-    // hubConnection.onclose((error) => print("Connection Closed"));
+    hubConnection.on("ReceiveMessage", _receiveMessageFromServer);
+    hubConnection.onclose((error) => print("Connection Closed"));
 
     setState(() {});
   }
@@ -112,8 +124,6 @@ class _HomePage extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomButtonTest(),
-                  NotificationPage(),
                   CustomAdvertisingItemList(),
                   CategoryButtonItemList(),
                   Padding(
@@ -135,8 +145,10 @@ class _HomePage extends State<HomePage> {
   }
 
   void _receiveMessageFromServer(var message) {
+    if (message == null) return;
     if (message != "" || message != null) {
       setState(() {
+        createNotification("test", message[0].toString());
         data = message[0].toString();
       });
       print(message);
