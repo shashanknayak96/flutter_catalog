@@ -4,6 +4,7 @@ import 'package:flutter_catalog/core/CatalogStore.dart';
 import 'package:flutter_catalog/pages/cartpage.dart';
 import 'package:flutter_catalog/pages/homepage.dart';
 import 'package:flutter_catalog/pages/loginpage.dart';
+import 'package:flutter_catalog/pages/registerpage.dart';
 import 'package:flutter_catalog/pages/testPage.dart';
 import 'package:flutter_catalog/services/NotificationService.dart';
 import 'package:flutter_catalog/utils/routes.dart';
@@ -34,10 +35,11 @@ class MyApp extends StatelessWidget {
       // darkTheme: CustomTheme.darkTheme(context),
       initialRoute: MyRoutes.homeRoute,
       routes: {
-        "/": (context) => HomePage(),
+        "/": (context) => LoginPage(),
         "/NotificationPage": (context) => NotificationPage(),
         MyRoutes.homeRoute: (context) => HomePage(),
         MyRoutes.loginRoute: (content) => LoginPage(),
+        MyRoutes.registerRoute: (content) => RegisterPage(),
         MyRoutes.cartRoute: (content) => CartPage(),
         MyRoutes.testRoute: (content) => TestPage(),
       },

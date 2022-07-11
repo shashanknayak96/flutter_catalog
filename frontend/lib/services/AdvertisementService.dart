@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import "package:http/http.dart" as http;
 import 'package:flutter_catalog/services/AbstractServices/AbstractAdvertisementService.dart';
 import '../models/advertisementItem.dart';
 
@@ -9,8 +8,7 @@ class AdvertisementService extends AbstractAdvertisementService {
   Future<List<AdvertisementItem>> getAdvertisements() async {
     List<AdvertisementItem> advertisementList = [];
     try {
-      await Future.delayed(Duration(seconds: 2));
-      var advertisementResponse = await http.get(
+      var advertisementResponse = await client.get(
         Uri.parse((isPc ? pcUrl : laptopUrl) + "api/advertisement"),
         headers: headers,
       );

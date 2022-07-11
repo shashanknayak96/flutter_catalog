@@ -30,21 +30,24 @@ public class UserService : IUserService
 
 		var hashedPassword = EncryptionHelper.CreateHash(userRegisterModel.Password);
 		var newUser = new User {
-			Username = userRegisterModel.Email,
+			Username = userRegisterModel.Name,
 			Email = userRegisterModel.Email,
 			Password = hashedPassword
 		};
 		var insertedUser = await _service.CreateAsync(newUser);
 
 		var token = _tokenService.GenerateAccessToken(insertedUser);
+		var refreshToken = _tokenService.GenerateRefreshToken();
 		return new AuthenticationResult 
 		{
+			userId = insertedUser.Id,
 			Token = token,
+			RefreshToken = refreshToken,
 			Success = true
 		};
 	}
 
-	public async Task<AuthenticationResult> LoginUser(UserLoginModel userLoginModel)
+	public async Task<UserResponseModel> LoginUser(UserLoginModel userLoginModel)
 	{
 		var userModel = new User {
 			Email = userLoginModel.Email
@@ -52,17 +55,11 @@ public class UserService : IUserService
 		var usersFromDb = await _service.GetAsyncByFilter(x => x.Email == userLoginModel.Email);
 		var user = usersFromDb.FirstOrDefault();
 		if(user is null)
-			return new AuthenticationResult
-			{
-				Error = new[] {"Incorrect email or password"}
-			};
+			return null;
 
 		var verifyPasswordResult = EncryptionHelper.Verify(userLoginModel.Password, user.Password);
 		if(!verifyPasswordResult)
-			return new AuthenticationResult
-			{
-				Error = new[] {"Incorrect email or password"}
-			};
+			return null;
 
 		var accessToken = _tokenService.GenerateAccessToken(user);
 		var refreshToken = _tokenService.GenerateRefreshToken();
@@ -73,10 +70,14 @@ public class UserService : IUserService
 		// TODO: Put method in trycatch and return 500 if it fails; return ApiResponse?
 		await _service.UpdateAsync(user.Id, user);
 
-		return new AuthenticationResult{
-			Token = accessToken,
+		return new UserResponseModel{
+			UserId = user.Id,
+			FirstName = user.FirstName,
+			LastName = user.LastName,
+			Address = user.Address,
+			Email = user.Email,
+			AccessToken = accessToken,
 			RefreshToken = refreshToken,
-			Success = true
 		};
 	}
 

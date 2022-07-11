@@ -38,9 +38,30 @@ public class UserController : ControllerBase
 			return new ApiResponse(HttpStatusCode.BadRequest, null, "Incorrect username or password");
 		}
 		var response = await _userService.LoginUser(user);
-		if(!response.Success)
-			return new ApiResponse(HttpStatusCode.NotFound, response);
+		if(response == null)
+			return new ApiResponse(HttpStatusCode.NotFound);
 		return new ApiResponse(HttpStatusCode.OK, response);
+	}
+
+	[HttpPost]
+	[Route("refresh")]
+	public async Task <ApiResponse> Refresh(TokenApiModel tokenApiModel)
+	{
+		if (tokenApiModel.AccessToken is null || tokenApiModel.RefreshToken is null)
+			return new ApiResponse(HttpStatusCode.Unauthorized,errorMessage: "Invalid token");
+
+		var newAccessToken = String.Empty;
+		var newRefreshToken = String.Empty;		
+		(newAccessToken, newRefreshToken)= await _userService.RegenerateRefreshToken(tokenApiModel);
+
+		return new ApiResponse(HttpStatusCode.OK, 
+			new AuthenticationResult()
+			{
+				Token = newAccessToken,
+				RefreshToken = newRefreshToken,
+				Success = true
+			}
+		);
 	}
 
 	// TODO: Add controller to revoke refresh token

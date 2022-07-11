@@ -9,6 +9,7 @@ using System.Net;
 using catalog.api.Services.Interfaces;
 
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public class ProductController : ControllerBase
 {
@@ -32,7 +33,6 @@ public class ProductController : ControllerBase
 		return new ApiResponse(HttpStatusCode.OK, response);
 	}
 
-	[Authorize]
 	[HttpGet("category")]
 	public async Task<ApiResponse> GetProductByCategoryName([FromQuery] string name) 
 	{
@@ -46,7 +46,6 @@ public class ProductController : ControllerBase
 		return new ApiResponse(HttpStatusCode.OK, response);
 	}
 
-	[Authorize]
 	[HttpGet]
 	public async Task<ApiResponse> GetProductByName([FromQuery] string name) 
 	{

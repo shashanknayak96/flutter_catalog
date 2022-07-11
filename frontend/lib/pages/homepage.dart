@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import "package:flutter/material.dart";
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_catalog/components/Advertisement/AdvertisingItemList.dart';
 import 'package:flutter_catalog/components/App_BottomBar/HomePageAppBar.dart';
 import 'package:flutter_catalog/components/App_BottomBar/HomePageBottomBar.dart';
@@ -11,10 +12,14 @@ import 'package:flutter_catalog/components/Drawer/OptionsDrawer.dart';
 import 'package:flutter_catalog/components/ProductGrid/ProductGridItemList.dart';
 import 'package:flutter_catalog/components/customScrollBehavior.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flutter_catalog/pages/loginpage.dart';
+import 'package:flutter_catalog/utils/routes.dart';
+import 'package:flutter_session/flutter_session.dart';
 import 'package:signalr_client/signalr_client.dart';
 
 import '../components/App_BottomBar/CustomButton.dart';
 import '../components/Theme/customTheme.dart';
+import '../models/session.dart';
 import '../services/NotificationService.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,6 +33,7 @@ class _HomePage extends State<HomePage> {
   final int age = 25;
   final String name = "Shashank";
   String data = "SOMETHING";
+  bool loggedIn = false;
 
   @override
   void initState() {
@@ -75,6 +81,32 @@ class _HomePage extends State<HomePage> {
   }
 
   loadData() async {
+    // Check session
+    print("Checking Session");
+    var accessToken = await FlutterSession().get(session().accessToken);
+    if (accessToken == "" || accessToken == null) {
+      print("Session not found");
+      // SchedulerBinding.instance?.addPostFrameCallback((_) {
+      // Navigator.of(context).pushReplacementNamed(MyRoutes.loginRoute);
+      // });
+    } else {
+      print("Session: " + accessToken);
+      loggedIn = true;
+
+      // SIGNALR Implementation
+      // The location of the SignalR Server.
+      // const serverUrl = "http://192.168.31.100/message";
+      // // Creates the connection by using the HubConnectionBuilder.
+      // var hubConnection = HubConnectionBuilder().withUrl(serverUrl).build();
+      // print("Starting signalr server");
+
+      // await hubConnection.start();
+      // // When the connection is closed, print out a message to the console.
+
+      // hubConnection.on("ReceiveMessage", _receiveMessageFromServer);
+      // hubConnection.onclose((error) => print("Connection Closed"));
+    }
+
     // await Future.delayed(Duration(seconds: 1));
     // var catalogString =
     //     await rootBundle.loadString("assets/files/catalog.json");
@@ -83,65 +115,53 @@ class _HomePage extends State<HomePage> {
     // CatalogModel.items =
     //     List.from(productData).map<Item>((item) => Item.fromMap(item)).toList();
 
-    // SIGNALR Implementation
-
-    // The location of the SignalR Server.
-    const serverUrl = "http://192.168.31.100/message";
-    // Creates the connection by using the HubConnectionBuilder.
-    var hubConnection = HubConnectionBuilder().withUrl(serverUrl).build();
-    print("Starting signalr server");
-
-    await hubConnection.start();
-    // When the connection is closed, print out a message to the console.
-
-    hubConnection.on("ReceiveMessage", _receiveMessageFromServer);
-    hubConnection.onclose((error) => print("Connection Closed"));
-
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: HomePageAppBar(),
-      drawer: OptionsDrawer(),
-      backgroundColor: Theme.of(context).backgroundColor,
-      // floatingActionButton: FloatingActionButton(
-      //   backgroundColor: Theme.of(context).buttonColor,
-      //   onPressed: () {
-      //     Navigator.pushNamed(context, MyRoutes.cartRoute);
-      //   },
-      //   child: Icon(
-      //     CupertinoIcons.cart,
-      //     color: Colors.white,
-      //   ),
-      // ),
-      body: ScrollConfiguration(
-        behavior: CustomBehavior(),
-        child: SingleChildScrollView(
-          child: SafeArea(
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomAdvertisingItemList(),
-                  CategoryButtonItemList(),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 16.0),
-                    child: Text(
-                      "CURRENTLY TRENDING",
-                      style: Theme.of(context).textTheme.headline3,
+    return !loggedIn
+        ? LoginPage()
+        : Scaffold(
+            appBar: HomePageAppBar(),
+            drawer: OptionsDrawer(),
+            backgroundColor: Theme.of(context).backgroundColor,
+            // floatingActionButton: FloatingActionButton(
+            //   backgroundColor: Theme.of(context).buttonColor,
+            //   onPressed: () {
+            //     Navigator.pushNamed(context, MyRoutes.cartRoute);
+            //   },
+            //   child: Icon(
+            //     CupertinoIcons.cart,
+            //     color: Colors.white,
+            //   ),
+            // ),
+            body: ScrollConfiguration(
+              behavior: CustomBehavior(),
+              child: SingleChildScrollView(
+                child: SafeArea(
+                  child: Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomAdvertisingItemList(),
+                        CategoryButtonItemList(),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+                          child: Text(
+                            "CURRENTLY TRENDING",
+                            style: Theme.of(context).textTheme.headline3,
+                          ),
+                        ),
+                        ProductGridItemList(),
+                      ],
                     ),
                   ),
-                  ProductGridItemList(),
-                ],
+                ),
               ),
             ),
-          ),
-        ),
-      ),
-      bottomNavigationBar: HomePageBottomBar(),
-    );
+            bottomNavigationBar: HomePageBottomBar(),
+          );
   }
 
   void _receiveMessageFromServer(var message) {

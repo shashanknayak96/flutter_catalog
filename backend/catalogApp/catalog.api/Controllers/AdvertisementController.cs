@@ -5,8 +5,10 @@ using catalog.db.Models;
 using catalog.api.Models;
 using System.Net;
 using catalog.api.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public class AdvertisementController : ControllerBase
 {

@@ -6,26 +6,26 @@ import 'package:flutter_catalog/utils/routes.dart';
 import 'package:flutter_session/flutter_session.dart';
 
 import '../components/Button/ActionButton.dart';
-import '../models/session.dart';
 import '../services/AbstractServices/AbstractAuthenticationService.dart';
 import '../services/ServiceLocator.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
+  final name = TextEditingController(text: "Shashank Nayak");
   final email = TextEditingController(text: "s@gmail.com");
   final password = TextEditingController(text: "123");
 
   final AbstractAuthenticationService _authenticationService =
       getIt<AbstractAuthenticationService>();
 
-  UserResponseModel? response;
+  bool? response;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 height: 50,
               ),
-              Image.asset("assets/images/login_image.png", fit: BoxFit.cover),
+              Image.asset("assets/images/welcome_image.png", fit: BoxFit.cover),
               SizedBox(
                 height: 50,
               ),
@@ -52,9 +52,9 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.only(right: 16.0, left: 16.0),
                 child: Center(
                   child: Text(
-                    "SOME SHOPPING APP",
+                    "Please enter the following details",
                     style: TextStyle(
-                      fontSize: 32,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).primaryColor,
                     ),
@@ -69,6 +69,25 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
                 child: Column(
                   children: [
+                    TextFormField(
+                      controller: name,
+                      cursorColor: Theme.of(context).primaryColor,
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      decoration: InputDecoration(
+                        hintText: "Enter your name",
+                        labelText: "Name",
+                        labelStyle: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Username/Email cannot be null";
+                        }
+                      },
+                    ),
                     TextFormField(
                       controller: email,
                       cursorColor: Theme.of(context).primaryColor,
@@ -112,41 +131,35 @@ class _LoginPageState extends State<LoginPage> {
                       height: 60,
                     ),
                     ActionButton(
-                      buttonText: "Login",
+                      buttonText: "Register",
                       color: lightBlue,
                       onTap: () async {
-                        response = await _authenticationService.login(
-                          UserLoginModel(
+                        response = await _authenticationService.register(
+                          UserRegisterModel(
+                            name: name.text,
                             email: email.text,
                             password: password.text,
                           ),
                         );
-                        if (response != null) {
-                          await FlutterSession()
-                              .set(session().userModel, response);
-                          await FlutterSession()
-                              .set(session().userId, response?.userId);
-                          await FlutterSession().set(
-                              session().accessToken, response?.accesstoken);
-                          await FlutterSession().set(
-                              session().refreshToken, response?.refreshtoken);
+                        if (response == true) {
                           Navigator.of(context)
-                              .pushReplacementNamed(MyRoutes.homeRoute);
+                              .pushReplacementNamed(MyRoutes.loginRoute);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               duration: Duration(seconds: 1),
-                              content: Text("Invalid Email or Password."),
+                              content: Text(
+                                  "Unable to save user. Please try again later."),
                             ),
                           );
                         }
                       },
                     ),
                     ActionButton(
-                      buttonText: "Register",
+                      buttonText: "Back to login",
                       color: white,
                       onTap: () {
-                        Navigator.of(context).pushNamed(MyRoutes.registerRoute);
+                        Navigator.of(context).pushNamed(MyRoutes.loginRoute);
                       },
                     ),
                   ],

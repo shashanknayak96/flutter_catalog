@@ -5,8 +5,10 @@ using catalog.db.Models;
 using catalog.api.Services;
 using catalog.api.Models;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public class CategoryController : ControllerBase
 {

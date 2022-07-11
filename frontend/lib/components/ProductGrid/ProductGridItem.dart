@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_catalog/components/ProductGrid/ProductItemDetail.dart';
 import 'package:flutter_catalog/components/Common/TrendingIcon.dart';
 import 'package:flutter_catalog/models/product.dart';
-import 'package:flutter_catalog/pages/ProductDetailPage.dart';
+import 'package:flutter_catalog/pages/productDetailPage.dart';
 
 import '../CartIcon.dart';
 
@@ -35,7 +35,7 @@ class ProductGridItem extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              ProductDetailPage(product: product),
+                              productDetailPage(product: product),
                         ),
                       );
                     },

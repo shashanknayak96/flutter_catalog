@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_catalog/services/AbstractServices/AbstractCategoryService.dart';
-import "package:http/http.dart" as http;
 import '../models/category.dart';
 
 class CategoryService extends AbstractCategoryService {
@@ -9,8 +8,7 @@ class CategoryService extends AbstractCategoryService {
   Future<List<Category>> getCategories() async {
     List<Category> categoryList = [];
     try {
-      await Future.delayed(Duration(seconds: 5));
-      var categoryResponse = await http.get(
+      var categoryResponse = await client.get(
         Uri.parse(isPc ? pcUrl : laptopUrl + "/api/category"),
         headers: headers,
       );

@@ -35,13 +35,13 @@ class _ProductGridItemListState extends State<ProductGridItemList> {
           physics: ScrollPhysics(),
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
-          itemCount: productList.isEmpty ? 10 : productList.length,
+          itemCount: productList.isEmpty ? 6 : productList.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 0.80,
           ),
           itemBuilder: (context, index) {
-            return 1 == 1 //productList.isEmpty
+            return productList.isEmpty //productList.isEmpty
                 ? CustomShimmer(
                     width: 175,
                     height: 175,
@@ -57,7 +57,6 @@ class _ProductGridItemListState extends State<ProductGridItemList> {
 
   void loadProducts() async {
     productList = await _productService.getProducts();
-    print(productList);
     setState(() {});
   }
 }

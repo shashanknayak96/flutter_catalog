@@ -4,9 +4,9 @@ import 'package:flutter_catalog/components/App_BottomBar/DetailPageAppBar.dart';
 import 'package:flutter_catalog/components/ProductGrid/ProductItemDetail.dart';
 import 'package:flutter_catalog/models/product.dart';
 
-class ProductDetailPage extends StatelessWidget {
+class productDetailPage extends StatelessWidget {
   final Product product;
-  const ProductDetailPage({Key? key, required this.product}) : super(key: key);
+  const productDetailPage({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
