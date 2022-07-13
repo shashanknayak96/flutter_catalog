@@ -49,30 +49,23 @@ class AuthenticationService extends AbstractAuthenticationService {
   }
 
   Future<void> regenerateToken() async {
-    var accessToken = await FlutterSession().get(session().accessToken);
-    var refreshToken = await FlutterSession().get(session().refreshToken);
-
-    print("OLD TOKEN => " + accessToken);
-    print("OLD RTOKEN => " + refreshToken);
+    var userModel = await FlutterSession().get(session().userModel);
+    var userModelJson = UserResponseModel.toJson(userModel);
 
     var response = await client.post(
         Uri.parse(isPc ? pcUrl : laptopUrl + "/api/user/refresh"),
         body: jsonEncode(<String, String>{
-          'accessToken': accessToken,
-          'refreshToken': refreshToken
+          'accessToken': userModelJson.accessToken,
+          'refreshToken': userModelJson.refreshToken
         }));
 
     if (response.statusCode == 200) {
-      print(jsonDecode(response.body));
+      // TODO: Fix this being called for all API's
       var decodedData = jsonDecode(response.body)["result"];
-      accessToken = decodedData["token"].toString();
-      refreshToken = decodedData["refreshToken"].toString();
-
-      await FlutterSession().set(session().accessToken, accessToken);
-      await FlutterSession().set(session().refreshToken, refreshToken);
-
-      print("NEW TOKEN => " + accessToken);
-      print("NEW RTOKEN => " + refreshToken);
+      userModelJson.accessToken = decodedData["token"].toString();
+      userModelJson.refreshToken = decodedData["refreshToken"].toString();
+      print("NEW TOKEN: " + userModelJson.accessToken);
+      await FlutterSession().set(session().userModel, userModelJson);
     }
   }
 }

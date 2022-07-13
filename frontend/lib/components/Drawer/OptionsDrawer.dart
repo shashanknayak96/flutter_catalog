@@ -10,6 +10,10 @@ import '../../models/session.dart';
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
 class OptionsDrawer extends StatefulWidget {
+  final UserResponseModel userModel;
+
+  const OptionsDrawer({Key? key, required this.userModel}) : super(key: key);
+
   @override
   State<OptionsDrawer> createState() => _OptionsDrawerState();
 }
@@ -24,9 +28,7 @@ class _OptionsDrawerState extends State<OptionsDrawer> {
     loadData();
   }
 
-  loadData() async {
-    user = await FlutterSession().get(session().userModel);
-  }
+  loadData() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +45,17 @@ class _OptionsDrawerState extends State<OptionsDrawer> {
                 color: lightBlue,
               ),
               accountName: Text(
-                "Shashank",
+                widget.userModel.firstname == null
+                    ? "NONAME"
+                    : widget.userModel.firstname +
+                        " " +
+                        widget.userModel.lastname,
                 style: TextStyle(
                   color: Colors.black,
                 ),
               ),
               accountEmail: Text(
-                "shashank96.nayak@gmail.com",
+                widget.userModel.email,
                 style: TextStyle(
                   color: Colors.black,
                 ),
@@ -103,9 +109,7 @@ class _OptionsDrawerState extends State<OptionsDrawer> {
               ),
               textColor: Colors.black,
               onTap: () async {
-                await FlutterSession().set(session().accessToken, "");
-                await FlutterSession().set(session().refreshToken, "");
-                await FlutterSession().set(session().userId, "");
+                await FlutterSession().set(session().userModel, null);
                 Navigator.of(context).pushReplacementNamed(MyRoutes.loginRoute);
               },
             )

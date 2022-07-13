@@ -20,6 +20,7 @@ import 'package:signalr_client/signalr_client.dart';
 import '../components/App_BottomBar/CustomButton.dart';
 import '../components/Theme/customTheme.dart';
 import '../models/session.dart';
+import '../models/user.dart';
 import '../services/NotificationService.dart';
 
 class HomePage extends StatefulWidget {
@@ -34,6 +35,9 @@ class _HomePage extends State<HomePage> {
   final String name = "Shashank";
   String data = "SOMETHING";
   bool loggedIn = false;
+
+  var userModel;
+  late UserResponseModel userModelJson;
 
   @override
   void initState() {
@@ -83,14 +87,17 @@ class _HomePage extends State<HomePage> {
   loadData() async {
     // Check session
     print("Checking Session");
-    var accessToken = await FlutterSession().get(session().accessToken);
-    if (accessToken == "" || accessToken == null) {
+    userModel = await FlutterSession().get(session().userModel);
+    userModelJson = UserResponseModel.toJson(userModel);
+    print("AT HOMEPAGE");
+    print(userModelJson);
+    if (userModelJson.accessToken == "" || userModelJson.accessToken == null) {
       print("Session not found");
       // SchedulerBinding.instance?.addPostFrameCallback((_) {
       // Navigator.of(context).pushReplacementNamed(MyRoutes.loginRoute);
       // });
     } else {
-      print("Session: " + accessToken);
+      print("Session: " + userModelJson.accessToken);
       loggedIn = true;
 
       // SIGNALR Implementation
@@ -124,7 +131,7 @@ class _HomePage extends State<HomePage> {
         ? LoginPage()
         : Scaffold(
             appBar: HomePageAppBar(),
-            drawer: OptionsDrawer(),
+            drawer: OptionsDrawer(userModel: userModelJson),
             backgroundColor: Theme.of(context).backgroundColor,
             // floatingActionButton: FloatingActionButton(
             //   backgroundColor: Theme.of(context).buttonColor,
@@ -144,6 +151,26 @@ class _HomePage extends State<HomePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        ListTile(
+                          tileColor: lightBlue,
+                          title: Text(
+                            "Logout",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                          textColor: Colors.black,
+                          onTap: () async {
+                            await FlutterSession()
+                                .set(session().accessToken, "");
+                            await FlutterSession()
+                                .set(session().refreshToken, "");
+                            await FlutterSession().set(session().userId, "");
+                            Navigator.of(context)
+                                .pushReplacementNamed(MyRoutes.loginRoute);
+                          },
+                        ),
                         CustomAdvertisingItemList(),
                         CategoryButtonItemList(),
                         Padding(

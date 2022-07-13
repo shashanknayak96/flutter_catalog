@@ -25,8 +25,6 @@ class _LoginPageState extends State<LoginPage> {
   final AbstractAuthenticationService _authenticationService =
       getIt<AbstractAuthenticationService>();
 
-  UserResponseModel? response;
-
   @override
   Widget build(BuildContext context) {
     SnackBar snackBar;
@@ -115,21 +113,18 @@ class _LoginPageState extends State<LoginPage> {
                       buttonText: "Login",
                       color: lightBlue,
                       onTap: () async {
-                        response = await _authenticationService.login(
+                        UserResponseModel response =
+                            await _authenticationService.login(
                           UserLoginModel(
                             email: email.text,
                             password: password.text,
                           ),
                         );
                         if (response != null) {
+                          print("ATLOGIN");
+                          print(response);
                           await FlutterSession()
                               .set(session().userModel, response);
-                          await FlutterSession()
-                              .set(session().userId, response?.userId);
-                          await FlutterSession().set(
-                              session().accessToken, response?.accesstoken);
-                          await FlutterSession().set(
-                              session().refreshToken, response?.refreshtoken);
                           Navigator.of(context)
                               .pushReplacementNamed(MyRoutes.homeRoute);
                         } else {

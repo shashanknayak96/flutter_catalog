@@ -8,7 +8,7 @@ class ExpiredTokenRetryPolicy extends RetryPolicy {
   @override
   Future<bool> shouldAttemptRetryOnResponse(ResponseData response) async {
     if (response.statusCode == 401) {
-      print("Token has expired. Getting new token.");
+      print("Token expired");
       await AuthenticationService().regenerateToken();
       return true;
     }

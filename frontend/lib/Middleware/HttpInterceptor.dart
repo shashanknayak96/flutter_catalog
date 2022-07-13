@@ -1,4 +1,5 @@
 import 'package:flutter_catalog/models/session.dart';
+import 'package:flutter_catalog/models/user.dart';
 import 'package:flutter_session/flutter_session.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 
@@ -14,8 +15,9 @@ class HttpInterceptor implements InterceptorContract {
       data.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS";
       data.headers["content-type"] = "application/json";
 
-      var token = await FlutterSession().get(session().accessToken);
-      data.headers["Authorization"] = "Bearer " + token;
+      var userModel = await FlutterSession().get(session().userModel);
+      var userModelJson = UserResponseModel.toJson(userModel);
+      data.headers["Authorization"] = "Bearer " + userModelJson.accessToken;
     } catch (e) {
       print(e);
     }

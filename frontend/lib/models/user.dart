@@ -28,8 +28,8 @@ class UserResponseModel {
   final String firstname;
   final String lastname;
   final String address;
-  final String accesstoken;
-  final String refreshtoken;
+  String accessToken;
+  String refreshToken;
 
   UserResponseModel({
     required this.userId,
@@ -39,8 +39,8 @@ class UserResponseModel {
     required this.firstname,
     required this.lastname,
     required this.address,
-    required this.accesstoken,
-    required this.refreshtoken,
+    required this.accessToken,
+    required this.refreshToken,
   });
 
   factory UserResponseModel.toJson(Map<String, dynamic> json) {
@@ -52,7 +52,22 @@ class UserResponseModel {
         firstname: json["firstname"],
         lastname: json["lastname"],
         address: json["address"],
-        accesstoken: json["accesstoken"],
-        refreshtoken: json["refreshtoken"]);
+        accessToken: json["accessToken"],
+        refreshToken: json["refreshToken"]);
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data["userId"] = userId;
+    data["userName"] = userName;
+    data["email"] = email;
+    data["password"] = password;
+    data["firstname"] = firstname;
+    data["lastname"] = lastname;
+    data["address"] = address;
+    data["accessToken"] = accessToken;
+    data["refreshToken"] = refreshToken;
+
+    return data;
   }
 }

@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
+import 'package:flutter_catalog/components/Shimmer/CustomShimmer.dart';
 import 'package:flutter_catalog/models/product.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ProductItemDetail extends StatelessWidget {
   final Product product;
