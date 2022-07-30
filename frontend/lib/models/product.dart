@@ -1,4 +1,5 @@
 import 'package:flutter_catalog/models/category.dart';
+import 'package:collection/collection.dart';
 
 class Product {
   final String id;
@@ -57,7 +58,7 @@ class Product {
 class ProductList {
   static List<Product> products = [];
 
-  Product getById(String id) {
-    return products.firstWhere((x) => x.id == id);
+  Product? getById(String id) {
+    return products.firstWhereOrNull((x) => x.id == id);
   }
 }

@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import 'package:flutter_catalog/components/App_BottomBar/CartPageAppBar.dart';
-import 'package:flutter_catalog/components/App_BottomBar/CustomButton.dart';
 import 'package:flutter_catalog/components/Cart/CartList.dart';
 import 'package:flutter_catalog/core/CatalogStore.dart';
 import 'package:flutter_catalog/models/cart.dart';
@@ -43,8 +42,9 @@ class _CartListState extends State<_CartList> {
   final _cart = (StoreKeeper.store as CatalogStore).cartModel;
   @override
   Widget build(BuildContext context) {
-    StoreKeeper.listen(context, to: [AddMutation, RemoveMutation]);
-    return !_cart.items.isNotEmpty
+    StoreKeeper.listen(context,
+        to: [AddProductMutation, RemoveProductMutation]);
+    return !_cart.products.isNotEmpty
         ? Center(
             child: Text("No items added to cart yet.",
                 style: TextStyle(
@@ -53,18 +53,18 @@ class _CartListState extends State<_CartList> {
                 )),
           )
         : ListView.builder(
-            itemCount: _cart.items.length,
+            itemCount: _cart.products.length,
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: ListTile(
-                leading: Image.network(_cart.items[index].image),
+                leading: Image.network(_cart.products[index].imageUrl),
                 trailing: IconButton(
                   icon: Icon(Icons.remove_circle),
                   onPressed: () {
-                    RemoveMutation(_cart.items[index]);
+                    RemoveProductMutation(_cart.products[index]);
                   },
                 ),
-                title: Text(_cart.items[index].name),
+                title: Text(_cart.products[index].name),
               ),
             ),
           );
@@ -76,7 +76,8 @@ class _CartTotal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    StoreKeeper.listen(context, to: [AddMutation, RemoveMutation]);
+    StoreKeeper.listen(context,
+        to: [AddProductMutation, RemoveProductMutation]);
     return Container(
       child: SizedBox(
         height: 200,

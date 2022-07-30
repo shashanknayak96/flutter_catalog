@@ -532,14 +532,11 @@ DA:17,0
 DA:18,0
 DA:19,0
 DA:20,0
-FN:87,System.Boolean catalog.api.Services.UserService/<>c::<RegenerateRefreshToken>b__5_0(System.Security.Claims.Claim)
+FN:88,System.Boolean catalog.api.Services.UserService/<>c::<RegenerateRefreshToken>b__5_0(System.Security.Claims.Claim)
 FNDA:0,System.Boolean catalog.api.Services.UserService/<>c::<RegenerateRefreshToken>b__5_0(System.Security.Claims.Claim)
-DA:88,0
-FN:47,System.Void catalog.api.Services.UserService/<LoginUser>d__4::MoveNext()
+DA:89,0
+FN:50,System.Void catalog.api.Services.UserService/<LoginUser>d__4::MoveNext()
 FNDA:0,System.Void catalog.api.Services.UserService/<LoginUser>d__4::MoveNext()
-DA:48,0
-DA:49,0
-DA:50,0
 DA:51,0
 DA:52,0
 DA:53,0
@@ -551,46 +548,47 @@ DA:58,0
 DA:60,0
 DA:61,0
 DA:62,0
-DA:63,0
 DA:64,0
 DA:65,0
 DA:67,0
 DA:68,0
-DA:70,0
 DA:71,0
+DA:73,0
 DA:74,0
+DA:75,0
 DA:76,0
 DA:77,0
 DA:78,0
 DA:79,0
 DA:80,0
 DA:81,0
-BRDA:54,370,0,0
-BRDA:54,370,1,0
-BRDA:61,460,0,0
-BRDA:61,460,1,0
-FN:83,System.Void catalog.api.Services.UserService/<RegenerateRefreshToken>d__5::MoveNext()
+DA:82,0
+BRDA:57,370,0,0
+BRDA:57,370,1,0
+BRDA:61,430,0,0
+BRDA:61,430,1,0
+FN:84,System.Void catalog.api.Services.UserService/<RegenerateRefreshToken>d__5::MoveNext()
 FNDA:0,System.Void catalog.api.Services.UserService/<RegenerateRefreshToken>d__5::MoveNext()
-DA:84,0
 DA:85,0
-DA:87,0
-DA:89,0
+DA:86,0
+DA:88,0
 DA:90,0
 DA:91,0
 DA:92,0
-DA:94,0
+DA:93,0
 DA:95,0
 DA:96,0
-DA:98,0
+DA:97,0
 DA:99,0
-DA:102,0
-DA:104,0
-DA:106,0
+DA:100,0
+DA:103,0
+DA:105,0
 DA:107,0
-BRDA:91,136,0,0
-BRDA:91,136,1,0
-BRDA:95,301,0,0
-BRDA:95,301,1,0
+DA:108,0
+BRDA:92,136,0,0
+BRDA:92,136,1,0
+BRDA:96,301,0,0
+BRDA:96,301,1,0
 FN:21,System.Void catalog.api.Services.UserService/<RegisterUser>d__3::MoveNext()
 FNDA:0,System.Void catalog.api.Services.UserService/<RegisterUser>d__3::MoveNext()
 DA:22,0
@@ -615,9 +613,12 @@ DA:42,0
 DA:43,0
 DA:44,0
 DA:45,0
+DA:46,0
+DA:47,0
+DA:48,0
 BRDA:25,336,0,0
 BRDA:25,336,1,0
-LF:72
+LF:73
 LH:0
 BRF:10
 BRH:0
@@ -653,23 +654,26 @@ FNF:5
 FNH:0
 end_of_record
 SF:/home/shashank/Projects/flutter_catalog/backend/catalogApp/catalog.api/Models/Authentication/AuthenticationResponseModel.cs
-FN:4,System.String catalog.api.Models.AuthenticationResult::get_Token()
-FNDA:0,System.String catalog.api.Models.AuthenticationResult::get_Token()
+FN:4,System.String catalog.api.Models.AuthenticationResult::get_userId()
+FNDA:0,System.String catalog.api.Models.AuthenticationResult::get_userId()
 DA:5,0
-FN:5,System.String catalog.api.Models.AuthenticationResult::get_RefreshToken()
-FNDA:0,System.String catalog.api.Models.AuthenticationResult::get_RefreshToken()
+FN:5,System.String catalog.api.Models.AuthenticationResult::get_Token()
+FNDA:0,System.String catalog.api.Models.AuthenticationResult::get_Token()
 DA:6,0
-FN:6,System.Boolean catalog.api.Models.AuthenticationResult::get_Success()
-FNDA:0,System.Boolean catalog.api.Models.AuthenticationResult::get_Success()
+FN:6,System.String catalog.api.Models.AuthenticationResult::get_RefreshToken()
+FNDA:0,System.String catalog.api.Models.AuthenticationResult::get_RefreshToken()
 DA:7,0
-FN:7,System.String[] catalog.api.Models.AuthenticationResult::get_Error()
-FNDA:0,System.String[] catalog.api.Models.AuthenticationResult::get_Error()
+FN:7,System.Boolean catalog.api.Models.AuthenticationResult::get_Success()
+FNDA:0,System.Boolean catalog.api.Models.AuthenticationResult::get_Success()
 DA:8,0
-LF:4
+FN:8,System.String[] catalog.api.Models.AuthenticationResult::get_Error()
+FNDA:0,System.String[] catalog.api.Models.AuthenticationResult::get_Error()
+DA:9,0
+LF:5
 LH:0
 BRF:0
 BRH:0
-FNF:4
+FNF:5
 FNH:0
 end_of_record
 SF:/home/shashank/Projects/flutter_catalog/backend/catalogApp/catalog.api/Models/Authentication/TokenApiModel.cs
@@ -712,17 +716,55 @@ FNF:2
 FNH:0
 end_of_record
 SF:/home/shashank/Projects/flutter_catalog/backend/catalogApp/catalog.api/Models/User/UserRegisterModel.cs
-FN:4,System.String catalog.api.Models.User.UserRegisterModel::get_Email()
-FNDA:0,System.String catalog.api.Models.User.UserRegisterModel::get_Email()
+FN:4,System.String catalog.api.Models.User.UserRegisterModel::get_Name()
+FNDA:0,System.String catalog.api.Models.User.UserRegisterModel::get_Name()
 DA:5,0
-FN:5,System.String catalog.api.Models.User.UserRegisterModel::get_Password()
-FNDA:0,System.String catalog.api.Models.User.UserRegisterModel::get_Password()
+FN:5,System.String catalog.api.Models.User.UserRegisterModel::get_Email()
+FNDA:0,System.String catalog.api.Models.User.UserRegisterModel::get_Email()
 DA:6,0
-LF:2
+FN:6,System.String catalog.api.Models.User.UserRegisterModel::get_Password()
+FNDA:0,System.String catalog.api.Models.User.UserRegisterModel::get_Password()
+DA:7,0
+LF:3
 LH:0
 BRF:0
 BRH:0
-FNF:2
+FNF:3
+FNH:0
+end_of_record
+SF:/home/shashank/Projects/flutter_catalog/backend/catalogApp/catalog.api/Models/User/UserResponseModel.cs
+FN:9,System.String catalog.api.Models.User.UserResponseModel::get_UserId()
+FNDA:0,System.String catalog.api.Models.User.UserResponseModel::get_UserId()
+DA:10,0
+FN:10,System.String catalog.api.Models.User.UserResponseModel::get_Username()
+FNDA:0,System.String catalog.api.Models.User.UserResponseModel::get_Username()
+DA:11,0
+FN:11,System.String catalog.api.Models.User.UserResponseModel::get_Email()
+FNDA:0,System.String catalog.api.Models.User.UserResponseModel::get_Email()
+DA:12,0
+FN:12,System.String catalog.api.Models.User.UserResponseModel::get_Password()
+FNDA:0,System.String catalog.api.Models.User.UserResponseModel::get_Password()
+DA:13,0
+FN:13,System.String catalog.api.Models.User.UserResponseModel::get_FirstName()
+FNDA:0,System.String catalog.api.Models.User.UserResponseModel::get_FirstName()
+DA:14,0
+FN:14,System.String catalog.api.Models.User.UserResponseModel::get_LastName()
+FNDA:0,System.String catalog.api.Models.User.UserResponseModel::get_LastName()
+DA:15,0
+FN:15,System.String catalog.api.Models.User.UserResponseModel::get_Address()
+FNDA:0,System.String catalog.api.Models.User.UserResponseModel::get_Address()
+DA:16,0
+FN:16,System.String catalog.api.Models.User.UserResponseModel::get_AccessToken()
+FNDA:0,System.String catalog.api.Models.User.UserResponseModel::get_AccessToken()
+DA:17,0
+FN:17,System.String catalog.api.Models.User.UserResponseModel::get_RefreshToken()
+FNDA:0,System.String catalog.api.Models.User.UserResponseModel::get_RefreshToken()
+DA:18,0
+LF:9
+LH:0
+BRF:0
+BRH:0
+FNF:9
 FNH:0
 end_of_record
 SF:/home/shashank/Projects/flutter_catalog/backend/catalogApp/catalog.api/Helpers/EncryptionHelper.cs
@@ -788,52 +830,52 @@ FNF:4
 FNH:0
 end_of_record
 SF:/home/shashank/Projects/flutter_catalog/backend/catalogApp/catalog.api/Controllers/AdvertisementController.cs
-FN:14,System.Void catalog.api.Controllers.AdvertisementController::.ctor(catalog.api.Services.Interfaces.IAdvertisementService)
+FN:16,System.Void catalog.api.Controllers.AdvertisementController::.ctor(catalog.api.Services.Interfaces.IAdvertisementService)
 FNDA:0,System.Void catalog.api.Controllers.AdvertisementController::.ctor(catalog.api.Services.Interfaces.IAdvertisementService)
-DA:15,0
-DA:16,0
 DA:17,0
 DA:18,0
-FN:43,System.Void catalog.api.Controllers.AdvertisementController/<AddAdvertisement>d__4::MoveNext()
+DA:19,0
+DA:20,0
+FN:45,System.Void catalog.api.Controllers.AdvertisementController/<AddAdvertisement>d__4::MoveNext()
 FNDA:0,System.Void catalog.api.Controllers.AdvertisementController/<AddAdvertisement>d__4::MoveNext()
-DA:44,0
-DA:45,0
 DA:46,0
 DA:47,0
-DA:50,0
-DA:51,0
+DA:48,0
+DA:49,0
 DA:52,0
 DA:53,0
 DA:54,0
-BRDA:45,26,0,0
-BRDA:45,26,1,0
-BRDA:51,201,0,0
-BRDA:51,201,1,0
-FN:30,System.Void catalog.api.Controllers.AdvertisementController/<GetAdvertisementById>d__3::MoveNext()
+DA:55,0
+DA:56,0
+BRDA:47,26,0,0
+BRDA:47,26,1,0
+BRDA:53,201,0,0
+BRDA:53,201,1,0
+FN:32,System.Void catalog.api.Controllers.AdvertisementController/<GetAdvertisementById>d__3::MoveNext()
 FNDA:0,System.Void catalog.api.Controllers.AdvertisementController/<GetAdvertisementById>d__3::MoveNext()
-DA:31,0
-DA:32,0
 DA:33,0
 DA:34,0
+DA:35,0
 DA:36,0
-DA:37,0
 DA:38,0
 DA:39,0
 DA:40,0
-BRDA:32,28,0,0
-BRDA:32,28,1,0
-BRDA:37,203,0,0
-BRDA:37,203,1,0
-FN:21,System.Void catalog.api.Controllers.AdvertisementController/<GetAdvertisements>d__2::MoveNext()
+DA:41,0
+DA:42,0
+BRDA:34,28,0,0
+BRDA:34,28,1,0
+BRDA:39,203,0,0
+BRDA:39,203,1,0
+FN:23,System.Void catalog.api.Controllers.AdvertisementController/<GetAdvertisements>d__2::MoveNext()
 FNDA:0,System.Void catalog.api.Controllers.AdvertisementController/<GetAdvertisements>d__2::MoveNext()
-DA:22,0
-DA:23,0
 DA:24,0
 DA:25,0
 DA:26,0
 DA:27,0
-BRDA:24,158,0,0
-BRDA:24,158,1,0
+DA:28,0
+DA:29,0
+BRDA:26,158,0,0
+BRDA:26,158,1,0
 LF:28
 LH:0
 BRF:10
@@ -861,52 +903,52 @@ FNF:2
 FNH:0
 end_of_record
 SF:/home/shashank/Projects/flutter_catalog/backend/catalogApp/catalog.api/Controllers/CategoryController.cs
-FN:14,System.Void catalog.api.Controllers.CategoryController::.ctor(catalog.api.Services.ICategoryService)
+FN:16,System.Void catalog.api.Controllers.CategoryController::.ctor(catalog.api.Services.ICategoryService)
 FNDA:0,System.Void catalog.api.Controllers.CategoryController::.ctor(catalog.api.Services.ICategoryService)
-DA:15,0
-DA:16,0
 DA:17,0
 DA:18,0
-FN:43,System.Void catalog.api.Controllers.CategoryController/<AddCategory>d__4::MoveNext()
+DA:19,0
+DA:20,0
+FN:45,System.Void catalog.api.Controllers.CategoryController/<AddCategory>d__4::MoveNext()
 FNDA:0,System.Void catalog.api.Controllers.CategoryController/<AddCategory>d__4::MoveNext()
-DA:44,0
-DA:45,0
 DA:46,0
 DA:47,0
+DA:48,0
 DA:49,0
-DA:50,0
 DA:51,0
 DA:52,0
 DA:53,0
-BRDA:45,26,0,0
-BRDA:45,26,1,0
-BRDA:50,201,0,0
-BRDA:50,201,1,0
-FN:21,System.Void catalog.api.Controllers.CategoryController/<GetCategory>d__2::MoveNext()
+DA:54,0
+DA:55,0
+BRDA:47,26,0,0
+BRDA:47,26,1,0
+BRDA:52,201,0,0
+BRDA:52,201,1,0
+FN:23,System.Void catalog.api.Controllers.CategoryController/<GetCategory>d__2::MoveNext()
 FNDA:0,System.Void catalog.api.Controllers.CategoryController/<GetCategory>d__2::MoveNext()
-DA:22,0
-DA:23,0
 DA:24,0
 DA:25,0
 DA:26,0
 DA:27,0
-BRDA:24,158,0,0
-BRDA:24,158,1,0
-FN:30,System.Void catalog.api.Controllers.CategoryController/<GetCategoryById>d__3::MoveNext()
+DA:28,0
+DA:29,0
+BRDA:26,158,0,0
+BRDA:26,158,1,0
+FN:32,System.Void catalog.api.Controllers.CategoryController/<GetCategoryById>d__3::MoveNext()
 FNDA:0,System.Void catalog.api.Controllers.CategoryController/<GetCategoryById>d__3::MoveNext()
-DA:31,0
-DA:32,0
 DA:33,0
 DA:34,0
+DA:35,0
 DA:36,0
-DA:37,0
 DA:38,0
 DA:39,0
 DA:40,0
-BRDA:32,28,0,0
-BRDA:32,28,1,0
-BRDA:37,203,0,0
-BRDA:37,203,1,0
+DA:41,0
+DA:42,0
+BRDA:34,28,0,0
+BRDA:34,28,1,0
+BRDA:39,203,0,0
+BRDA:39,203,1,0
 LF:28
 LH:0
 BRF:10
@@ -915,37 +957,37 @@ FNF:4
 FNH:0
 end_of_record
 SF:/home/shashank/Projects/flutter_catalog/backend/catalogApp/catalog.api/Controllers/ProductController.cs
-FN:16,System.Void catalog.api.Controllers.ProductController::.ctor(catalog.api.Services.Interfaces.IProductService)
+FN:17,System.Void catalog.api.Controllers.ProductController::.ctor(catalog.api.Services.Interfaces.IProductService)
 FNDA:0,System.Void catalog.api.Controllers.ProductController::.ctor(catalog.api.Services.Interfaces.IProductService)
-DA:17,0
 DA:18,0
 DA:19,0
 DA:20,0
-FN:73,System.Void catalog.api.Controllers.ProductController/<AddProduct>d__6::MoveNext()
+DA:21,0
+FN:72,System.Void catalog.api.Controllers.ProductController/<AddProduct>d__6::MoveNext()
 FNDA:0,System.Void catalog.api.Controllers.ProductController/<AddProduct>d__6::MoveNext()
+DA:73,0
 DA:74,0
 DA:75,0
 DA:76,0
-DA:77,0
+DA:78,0
 DA:79,0
 DA:80,0
 DA:81,0
 DA:82,0
-DA:83,0
-BRDA:75,26,0,0
-BRDA:75,26,1,0
-BRDA:80,201,0,0
-BRDA:80,201,1,0
-FN:64,System.Void catalog.api.Controllers.ProductController/<GetAllTrendingProducts>d__5::MoveNext()
+BRDA:74,26,0,0
+BRDA:74,26,1,0
+BRDA:79,201,0,0
+BRDA:79,201,1,0
+FN:63,System.Void catalog.api.Controllers.ProductController/<GetAllTrendingProducts>d__5::MoveNext()
 FNDA:0,System.Void catalog.api.Controllers.ProductController/<GetAllTrendingProducts>d__5::MoveNext()
+DA:64,0
 DA:65,0
 DA:66,0
 DA:67,0
 DA:68,0
 DA:69,0
-DA:70,0
-BRDA:67,158,0,0
-BRDA:67,158,1,0
+BRDA:66,158,0,0
+BRDA:66,158,1,0
 FN:37,System.Void catalog.api.Controllers.ProductController/<GetProductByCategoryName>d__3::MoveNext()
 FNDA:0,System.Void catalog.api.Controllers.ProductController/<GetProductByCategoryName>d__3::MoveNext()
 DA:38,0
@@ -961,36 +1003,36 @@ BRDA:39,28,0,0
 BRDA:39,28,1,0
 BRDA:44,203,0,0
 BRDA:44,203,1,0
-FN:23,System.Void catalog.api.Controllers.ProductController/<GetProductById>d__2::MoveNext()
+FN:24,System.Void catalog.api.Controllers.ProductController/<GetProductById>d__2::MoveNext()
 FNDA:0,System.Void catalog.api.Controllers.ProductController/<GetProductById>d__2::MoveNext()
-DA:24,0
 DA:25,0
 DA:26,0
 DA:27,0
-DA:29,0
+DA:28,0
 DA:30,0
 DA:31,0
 DA:32,0
 DA:33,0
-BRDA:25,28,0,0
-BRDA:25,28,1,0
-BRDA:30,203,0,0
-BRDA:30,203,1,0
-FN:51,System.Void catalog.api.Controllers.ProductController/<GetProductByName>d__4::MoveNext()
+DA:34,0
+BRDA:26,28,0,0
+BRDA:26,28,1,0
+BRDA:31,203,0,0
+BRDA:31,203,1,0
+FN:50,System.Void catalog.api.Controllers.ProductController/<GetProductByName>d__4::MoveNext()
 FNDA:0,System.Void catalog.api.Controllers.ProductController/<GetProductByName>d__4::MoveNext()
+DA:51,0
 DA:52,0
 DA:53,0
 DA:54,0
-DA:55,0
+DA:56,0
 DA:57,0
 DA:58,0
 DA:59,0
 DA:60,0
-DA:61,0
-BRDA:53,28,0,0
-BRDA:53,28,1,0
-BRDA:58,203,0,0
-BRDA:58,203,1,0
+BRDA:52,28,0,0
+BRDA:52,28,1,0
+BRDA:57,203,0,0
+BRDA:57,203,1,0
 LF:46
 LH:0
 BRF:18
@@ -1018,8 +1060,29 @@ DA:43,0
 DA:44,0
 BRDA:36,26,0,0
 BRDA:36,26,1,0
-BRDA:41,206,0,0
-BRDA:41,206,1,0
+BRDA:41,201,0,0
+BRDA:41,201,1,0
+FN:48,System.Void catalog.api.Controllers.UserController/<Refresh>d__4::MoveNext()
+FNDA:0,System.Void catalog.api.Controllers.UserController/<Refresh>d__4::MoveNext()
+DA:49,0
+DA:50,0
+DA:51,0
+DA:53,0
+DA:54,0
+DA:55,0
+DA:57,0
+DA:58,0
+DA:59,0
+DA:60,0
+DA:61,0
+DA:62,0
+DA:63,0
+DA:64,0
+DA:65,0
+BRDA:50,29,0,0
+BRDA:50,29,1,0
+BRDA:50,50,0,0
+BRDA:50,50,1,0
 FN:21,System.Void catalog.api.Controllers.UserController/<RegisterUser>d__2::MoveNext()
 FNDA:0,System.Void catalog.api.Controllers.UserController/<RegisterUser>d__2::MoveNext()
 DA:22,0
@@ -1035,10 +1098,10 @@ BRDA:23,26,0,0
 BRDA:23,26,1,0
 BRDA:28,206,0,0
 BRDA:28,206,1,0
-LF:22
+LF:37
 LH:0
-BRF:8
+BRF:12
 BRH:0
-FNF:3
+FNF:4
 FNH:0
 end_of_record

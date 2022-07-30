@@ -4,19 +4,22 @@ import 'package:flutter_catalog/models/cart.dart';
 import 'package:flutter_catalog/models/item.dart';
 import 'package:store_keeper/store_keeper.dart';
 
+import '../models/product.dart';
+
 class AddToCart extends StatelessWidget {
-  final Item item;
+  final Product product;
 
   const AddToCart({
     Key? key,
-    required this.item,
+    required this.product,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final _cart = (StoreKeeper.store as CatalogStore).cartModel;
-    StoreKeeper.listen(context, to: [AddMutation, RemoveMutation]);
-    bool isInCart = _cart.items.contains(item);
+    StoreKeeper.listen(context,
+        to: [AddProductMutation, RemoveProductMutation]);
+    bool isInCart = _cart.products.contains(product);
 
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
@@ -33,7 +36,7 @@ class AddToCart extends StatelessWidget {
             content: Text("Item added to cart."),
           ),
         );
-        if (!isInCart) AddMutation(item);
+        if (!isInCart) AddProductMutation(product);
       },
       child: isInCart
           ? Icon(Icons.check, color: Colors.white)

@@ -4,14 +4,14 @@ import 'package:flutter_catalog/components/addToCart.dart';
 import 'package:flutter_catalog/models/catalog.dart';
 import 'package:flutter_catalog/models/item.dart';
 
-import '../models/product.dart';
-import 'customImage.dart';
-import 'Theme/customTheme.dart';
+import '../../models/product.dart';
+import '../CartIcon.dart';
+import '../customImage.dart';
 
-class CustomItem extends StatelessWidget {
+class ProductItem extends StatelessWidget {
   final Product product;
 
-  const CustomItem({Key? key, required this.product}) : super(key: key);
+  const ProductItem({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +56,14 @@ class CustomItem extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               color: Theme.of(context).primaryColor),
                         ),
-                        AddToCart(product: product)
+                        //AddToCart(item: product)
                       ],
                     )
                   ],
                 ),
               ),
             ),
+            CartIcon(product: product)
           ],
         ),
       ),

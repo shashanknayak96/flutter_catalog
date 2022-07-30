@@ -29,4 +29,29 @@ class ProductService extends AbstractProductService {
     }
     return productList;
   }
+
+  @override
+  Future<List<Product>> getProductsByCategory(String categoryName) async {
+    List<Product> productList = [];
+
+    try {
+      // await Future.delayed(Duration(seconds: 5));
+      var productResponse = await client.get(
+        Uri.parse(isPc
+            ? pcUrl
+            : laptopUrl + "api/product/category?name=" + categoryName),
+        headers: headers,
+      );
+
+      if (productResponse.statusCode == 200) {
+        var decodedProductData = jsonDecode(productResponse.body);
+        productList = List.from(decodedProductData["result"])
+            .map<Product>((item) => Product.fromJson(item))
+            .toList();
+      }
+    } on SocketException {
+      print("No internet connection.");
+    }
+    return productList;
+  }
 }

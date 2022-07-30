@@ -25,10 +25,6 @@ class _HomePageBottomBarState extends State<HomePageBottomBar> {
       height: 50,
       width: size.width,
       color: Color(0xff64FCD9),
-      // decoration: BoxDecoration(
-      //   color: Color(0xff64FCD9), backgroundBlendMode: BlendMode.clear,
-      //   // borderRadius: BorderRadius.circular(20),
-      // ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -45,10 +41,12 @@ class _HomePageBottomBarState extends State<HomePageBottomBar> {
                 FaIcon(FontAwesomeIcons.shoppingCart,
                     color: Theme.of(context).iconTheme.color),
                 Positioned(
-                    left: 15,
-                    bottom: 15,
-                    child: CartCountIndicator(
-                        count: _cart.products.length.toString())),
+                  left: 15,
+                  bottom: 15,
+                  child: CartCountIndicator(
+                    count: _cart.products.length.toString(),
+                  ),
+                ),
               ],
             ),
           ),

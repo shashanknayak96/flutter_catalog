@@ -1,5 +1,9 @@
 import "package:flutter/material.dart";
 import 'package:flutter_catalog/models/category.dart';
+import 'package:flutter_catalog/pages/productListPage.dart';
+import 'package:flutter_catalog/utils/routes.dart';
+
+import '../ProductList/ProductList.dart';
 
 class CategoryButtonItem extends StatelessWidget {
   final Category category;
@@ -11,7 +15,15 @@ class CategoryButtonItem extends StatelessWidget {
     return Material(
       color: Colors.white,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  ProductListPage(categoryName: category.name),
+            ),
+          );
+        },
         child: AnimatedContainer(
           duration: Duration(seconds: 1),
           height: 35,

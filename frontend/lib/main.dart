@@ -9,12 +9,17 @@ import 'package:flutter_catalog/pages/testPage.dart';
 import 'package:flutter_catalog/services/NotificationService.dart';
 import 'package:flutter_catalog/utils/routes.dart';
 import 'package:store_keeper/store_keeper.dart';
-import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flutter/services.dart';
 
 import 'components/Button/NotificationPage.dart';
 import 'services/ServiceLocator.dart';
 
 void main() {
+  // Prevent landscape orientation
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
   setupServiceLocator();
   createNotificationChannel();
 

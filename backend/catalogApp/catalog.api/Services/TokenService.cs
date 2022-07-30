@@ -30,7 +30,7 @@ namespace catalog.api.Services
 						new Claim(JwtRegisteredClaimNames.Email, user.Email),
 						new Claim(ClaimsTypeEnum.ClaimId.ToString(), user.Id)
 					}),
-				Expires = DateTime.UtcNow.AddMinutes(1),
+				Expires = DateTime.UtcNow.AddMinutes(30),
 				SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
 			};
 

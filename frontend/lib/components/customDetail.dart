@@ -103,7 +103,7 @@ class CustomDetail extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
               ),
             ),
-            AddToCart(item: item),
+            // AddToCart(item: item),
           ],
         ),
       ),
